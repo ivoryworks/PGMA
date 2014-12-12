@@ -2,6 +2,8 @@ package com.ivoryworks.pgma;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
-    private String[] mPlanetTitles;
+    private String[] mMenuTitles;
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -24,11 +26,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+        mMenuTitles = getResources().getStringArray(R.array.drawer_menu_array);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);  
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, mPlanetTitles));
+                android.R.layout.simple_list_item_1, mMenuTitles));
 
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -78,7 +80,20 @@ public class MainActivity extends Activity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            // exec.
+            FragmentManager fragmentManager = getFragmentManager();
+            Fragment fragment;
+
+            switch (position) {
+            case 1:
+                fragment = new StopwatchFragment();
+                break;
+            case 0:
+            default:
+                fragment = new MainFragment();
+                break;
+            }
+            fragmentManager.beginTransaction().replace(R.id.main_fragment, fragment).commit();
+            mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
 }
