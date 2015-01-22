@@ -87,6 +87,9 @@ public class MainActivity extends Activity {
             case 1:
                 fragment = new StopwatchFragment();
                 break;
+            case 2:
+                fragment = new GoSenFragment();
+                break;
             case 0:
             default:
                 fragment = new MainFragment();
