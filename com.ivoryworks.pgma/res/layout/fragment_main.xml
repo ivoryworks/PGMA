@@ -3,13 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
         android:padding="8dp"
-        android:textSize="32sp"
-        android:typeface="sans"
-		android:text="Fragment A"
-		/>
+        />
 </RelativeLayout>
