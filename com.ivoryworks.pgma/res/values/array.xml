@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<string-array name="drawer_menu_array">
-	    <item>Top</item>
-	    <item>Stopwatch</item>
-	    <item>GoSen</item>
-    </string-array>
-</resources>
