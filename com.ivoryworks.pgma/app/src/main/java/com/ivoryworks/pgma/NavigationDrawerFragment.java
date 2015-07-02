@@ -1,5 +1,7 @@
 package com.ivoryworks.pgma;
 
+import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -101,11 +103,8 @@ public class NavigationDrawerFragment extends Fragment {
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_take_photo),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                }));
+                getActivity().getBaseContext().getResources().getStringArray(R.array.navigation_drawer_title)
+                ));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -278,5 +277,10 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+
+    public static int getPositionToId(Context context, int position) {
+        TypedArray itemArray = context.getResources().obtainTypedArray(R.array.navigation_drawer_title);
+        return itemArray.getResourceId(position, -1);
     }
 }
