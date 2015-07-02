@@ -3,6 +3,7 @@
 
     <string name="title_top">Top</string>
     <string name="title_take_photo">Take photo</string>
+    <string name="title_pick_image">Pick image</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

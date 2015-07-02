@@ -54,6 +54,11 @@ public class MainActivity extends ActionBarActivity
                         .replace(R.id.container, TakePhotoFragment.newInstance())
                         .commit();
                 break;
+            case R.string.title_pick_image:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, PickImageFragment.newInstance())
+                        .commit();
+                break;
             case R.string.title_top:
             default:
                 fragmentManager.beginTransaction()
