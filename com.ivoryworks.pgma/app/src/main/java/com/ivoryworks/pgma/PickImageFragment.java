@@ -3,14 +3,12 @@ package com.ivoryworks.pgma;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,13 +16,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class PickImageFragment extends Fragment implements View.OnClickListener {
 
     private final int REQ_CODE_ACTION_OPEN_DOCUMENT = 1;
+    private final String PREF_NAME_IMAGE_PATH = "PickImageFragment_ImagePath";
+    private SharedPreferences mPreferences;
     private ImageView mPreviewPhoto;
 
     /**
@@ -40,12 +37,14 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
     }
 
     public PickImageFragment() {
-        // Required empty public constructor
+        setRetainInstance(true);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPreferences = getActivity().getSharedPreferences(getActivity().getPackageName(), Context.MODE_PRIVATE);
+        mPreferences.edit().remove(PREF_NAME_IMAGE_PATH).apply();
     }
 
     @Override
@@ -56,6 +55,16 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
 
         layoutView.findViewById(R.id.btnGallery).setOnClickListener(this);
         mPreviewPhoto = (ImageView) layoutView.findViewById(R.id.previewPhoto);
+
+        String imagePath = mPreferences.getString(PREF_NAME_IMAGE_PATH, "");
+        if (imagePath.isEmpty() != true) {
+            File imageFile = new File(imagePath);
+            if (imageFile.exists()) {
+                Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
+                int orientation = Utils.getOrientationType(imagePath);
+                Utils.setBitmap2ImageView(mPreviewPhoto, photoBitmap, orientation);
+            }
+        }
 
         return layoutView;
     }
@@ -97,76 +106,18 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         case REQ_CODE_ACTION_OPEN_DOCUMENT:
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
-                int orientation = getOrientationType(imageUri);
-                setMatrix(mPreviewPhoto, imageUri, orientation);
+                String imagePath = Utils.getPath(getActivity(), imageUri);
+
+                // Save file path
+                SharedPreferences.Editor editor = mPreferences.edit();
+                editor.putString(PREF_NAME_IMAGE_PATH, imagePath);
+                editor.apply();
+
+                Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
+                int orientation = Utils.getOrientationType(imagePath);
+                Utils.setBitmap2ImageView(mPreviewPhoto, photoBitmap, orientation);
             }
             break;
-        }
-    }
-
-    private Uri createPhotoUri() {
-        // DCIM directory
-        File dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-
-        String timeStamp = new SimpleDateFormat("yyyy_MM_dd__HH_mm_ss").format(new Date());
-        File mediaFile = new File(dcim.getPath() + File.separator + timeStamp + ".jpg");
-        return Uri.fromFile(mediaFile);
-    }
-
-    private int getOrientationType(Uri uri) {
-        ExifInterface exifIf = null;
-        try {
-            exifIf = new ExifInterface(uri.getPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return exifIf.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
-    }
-
-    private void setMatrix(ImageView imageView, Uri photoUri, int orientationType) {
-        Context context = getActivity().getBaseContext();
-        try {
-            Bitmap photoBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), photoUri);
-            int width = photoBitmap.getWidth();
-            int height = photoBitmap.getHeight();
-            Bitmap rotateBitmap;
-            Matrix mat = new Matrix();
-            switch(orientationType) {
-                case ExifInterface.ORIENTATION_NORMAL:
-                    rotateBitmap = photoBitmap;
-                    break;
-                case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-                    rotateBitmap = photoBitmap;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    mat.postRotate(180);
-                    rotateBitmap = Bitmap.createBitmap(photoBitmap, 0, 0, width, height, mat, true);
-                    break;
-                case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-                    rotateBitmap = photoBitmap;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    mat.postRotate(270);
-                    rotateBitmap = Bitmap.createBitmap(photoBitmap, 0, 0, width, height, mat, true);
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    mat.postRotate(90);
-                    rotateBitmap = Bitmap.createBitmap(photoBitmap, 0, 0, width, height, mat, true);
-                    break;
-                case ExifInterface.ORIENTATION_TRANSPOSE:
-                    rotateBitmap = photoBitmap;
-                    break;
-                case ExifInterface.ORIENTATION_TRANSVERSE:
-                    rotateBitmap = photoBitmap;
-                    break;
-                case ExifInterface.ORIENTATION_UNDEFINED:
-                default:
-                    rotateBitmap = photoBitmap;
-                    break;
-            }
-            imageView.setImageBitmap(rotateBitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

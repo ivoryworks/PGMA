@@ -48,23 +48,25 @@ public class MainActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         int itemId = NavigationDrawerFragment.getPositionToId(getBaseContext(), position);
         mTitle = getString(itemId);
+        Fragment fragment;
+        String tag;
         switch (itemId) {
-            case R.string.title_take_photo:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, TakePhotoFragment.newInstance())
-                        .commit();
-                break;
-            case R.string.title_pick_image:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, PickImageFragment.newInstance())
-                        .commit();
-                break;
-            case R.string.title_top:
-            default:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance())
-                        .commit();
-                break;
+        case R.string.title_take_photo:
+            tag = "take_photo";
+            fragment = TakePhotoFragment.newInstance();
+            break;
+        case R.string.title_pick_image:
+            tag = "pick_image";
+            fragment = PickImageFragment.newInstance();
+            break;
+        case R.string.title_top:
+        default:
+            tag = "top";
+            fragment = PlaceholderFragment.newInstance();
+            break;
+        }
+        if (fragmentManager.findFragmentByTag(tag) == null) {
+            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
         }
     }
 
@@ -108,11 +110,6 @@ public class MainActivity extends ActionBarActivity
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
         public static PlaceholderFragment newInstance() {
             PlaceholderFragment fragment = new PlaceholderFragment();
