@@ -1,9 +1,7 @@
 package com.ivoryworks.pgma;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -22,10 +20,11 @@ import java.util.Date;
 
 public class TakePhotoFragment extends Fragment implements View.OnClickListener {
 
+    public static String TAG = "TakePhotoFragment";
     private final int REQ_CODE_ACTION_IMAGE_CAPTURE = 1;
-    private final String PREF_NAME_IMAGE_PATH = "TakePhotoFragment_ImagePath";
+    private final String PREF_NAME_IMAGE_PATH = TAG + "_ImagePath";
     private Uri mPhotoUri;
-    private SharedPreferences mPreferences;
+    private PreferencesManager mPreferencesManager;
     private ImageView mPreviewPhoto;
 
     /**
@@ -47,8 +46,8 @@ public class TakePhotoFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPreferences = getActivity().getSharedPreferences(getActivity().getPackageName(), Context.MODE_PRIVATE);
-        mPreferences.edit().remove(PREF_NAME_IMAGE_PATH).apply();
+        mPreferencesManager = PreferencesManager.newInstance(getActivity());
+        mPreferencesManager.remove(PREF_NAME_IMAGE_PATH);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class TakePhotoFragment extends Fragment implements View.OnClickListener 
         layoutView.findViewById(R.id.btnCamera).setOnClickListener(this);
         mPreviewPhoto = (ImageView) layoutView.findViewById(R.id.previewPhoto);
 
-        String imagePath = mPreferences.getString(PREF_NAME_IMAGE_PATH, "");
+        String imagePath = mPreferencesManager.getString(PREF_NAME_IMAGE_PATH);
         if (imagePath.isEmpty() != true) {
             File imageFile = new File(imagePath);
             if (imageFile.exists()) {
@@ -106,9 +105,7 @@ public class TakePhotoFragment extends Fragment implements View.OnClickListener 
                 String imagePath = Utils.getPath(getActivity(), mPhotoUri);
 
                 // Save file path
-                SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putString(PREF_NAME_IMAGE_PATH, imagePath);
-                editor.apply();
+                mPreferencesManager.setString(PREF_NAME_IMAGE_PATH, imagePath);
 
                 Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
                 int orientation = Utils.getOrientationType(imagePath);

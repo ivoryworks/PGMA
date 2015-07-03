@@ -52,16 +52,16 @@ public class MainActivity extends ActionBarActivity
         String tag;
         switch (itemId) {
         case R.string.title_take_photo:
-            tag = "take_photo";
+            tag = TakePhotoFragment.TAG;
             fragment = TakePhotoFragment.newInstance();
             break;
         case R.string.title_pick_image:
-            tag = "pick_image";
+            tag = PickImageFragment.TAG;
             fragment = PickImageFragment.newInstance();
             break;
         case R.string.title_top:
         default:
-            tag = "top";
+            tag = PlaceholderFragment.TAG;
             fragment = PlaceholderFragment.newInstance();
             break;
         }
@@ -110,6 +110,8 @@ public class MainActivity extends ActionBarActivity
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+
+        public static String TAG = "PlaceholderFragment";
 
         public static PlaceholderFragment newInstance() {
             PlaceholderFragment fragment = new PlaceholderFragment();
