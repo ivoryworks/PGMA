@@ -56,7 +56,7 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         mPreviewPhoto = (ImageView) layoutView.findViewById(R.id.previewPhoto);
 
         String imagePath = mPreferencesManager.getString(PREF_NAME_IMAGE_PATH);
-        if (imagePath.isEmpty() != true) {
+        if (imagePath != null && imagePath.isEmpty() != true) {
             File imageFile = new File(imagePath);
             if (imageFile.exists()) {
                 Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
