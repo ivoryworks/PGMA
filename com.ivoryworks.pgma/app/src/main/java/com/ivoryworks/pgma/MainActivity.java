@@ -59,6 +59,10 @@ public class MainActivity extends ActionBarActivity
             tag = PickImageFragment.TAG;
             fragment = PickImageFragment.newInstance();
             break;
+        case R.string.title_stop_watch:
+            tag = StopwatchFragment.TAG;
+            fragment = StopwatchFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;
