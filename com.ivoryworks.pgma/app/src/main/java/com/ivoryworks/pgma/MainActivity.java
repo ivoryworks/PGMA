@@ -63,6 +63,10 @@ public class MainActivity extends ActionBarActivity
             tag = StopwatchFragment.TAG;
             fragment = StopwatchFragment.newInstance();
             break;
+        case R.string.title_robotium_punchball:
+            tag = RobotiumPunchballFragment.TAG;
+            fragment = RobotiumPunchballFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;
