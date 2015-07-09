@@ -40,7 +40,6 @@ public class TakePhotoFragment extends Fragment implements View.OnClickListener 
     }
 
     public TakePhotoFragment() {
-        setRetainInstance(true);
     }
 
     @Override

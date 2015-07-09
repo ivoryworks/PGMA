@@ -73,6 +73,7 @@ public class MainActivity extends ActionBarActivity
             break;
         }
         if (fragmentManager.findFragmentByTag(tag) == null) {
+            fragment.setRetainInstance(true);
             fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
         }
     }

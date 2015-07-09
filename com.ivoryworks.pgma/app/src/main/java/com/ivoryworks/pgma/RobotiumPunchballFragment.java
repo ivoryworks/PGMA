@@ -24,7 +24,6 @@ public class RobotiumPunchballFragment extends Fragment implements View.OnClickL
     }
 
     public RobotiumPunchballFragment() {
-        setRetainInstance(true);
     }
 
     @Override

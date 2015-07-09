@@ -36,7 +36,6 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
     }
 
     public PickImageFragment() {
-        setRetainInstance(true);
     }
 
     @Override

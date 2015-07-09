@@ -27,7 +27,6 @@ public class StopwatchFragment extends Fragment implements View.OnClickListener,
     }
 
     public StopwatchFragment() {
-        setRetainInstance(true);
     }
 
     @Override
