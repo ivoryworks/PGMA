@@ -35,38 +35,35 @@ public class Utils {
         Bitmap rotateBitmap;
         Matrix mat = new Matrix();
         switch(orientationType) {
-            case ExifInterface.ORIENTATION_NORMAL:
-                rotateBitmap = imageBitmap;
-                break;
-            case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-                rotateBitmap = imageBitmap;
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_180:
-                mat.postRotate(180);
-                rotateBitmap = Bitmap.createBitmap(imageBitmap, 0, 0, width, height, mat, true);
-                break;
-            case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-                rotateBitmap = imageBitmap;
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_270:
-                mat.postRotate(270);
-                rotateBitmap = Bitmap.createBitmap(imageBitmap, 0, 0, width, height, mat, true);
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_90:
-                mat.postRotate(90);
-                rotateBitmap = Bitmap.createBitmap(imageBitmap, 0, 0, width, height, mat, true);
-                break;
-            case ExifInterface.ORIENTATION_TRANSPOSE:
-                rotateBitmap = imageBitmap;
-                break;
-            case ExifInterface.ORIENTATION_TRANSVERSE:
-                rotateBitmap = imageBitmap;
-                break;
-            case ExifInterface.ORIENTATION_UNDEFINED:
-            default:
-                rotateBitmap = imageBitmap;
-                break;
+        case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+            mat.preScale(1, -1);
+            break;
+        case ExifInterface.ORIENTATION_ROTATE_180:
+            mat.postRotate(180);
+            break;
+        case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+            mat.preScale(-1, 1);
+            break;
+        case ExifInterface.ORIENTATION_ROTATE_270:
+            mat.postRotate(270);
+            break;
+        case ExifInterface.ORIENTATION_ROTATE_90:
+            mat.postRotate(90);
+            break;
+        case ExifInterface.ORIENTATION_TRANSPOSE:
+            mat.postRotate(90);
+            mat.preScale(1, -1);
+            break;
+        case ExifInterface.ORIENTATION_TRANSVERSE:
+            mat.postRotate(270);
+            mat.preScale(1, -1);
+            break;
+        case ExifInterface.ORIENTATION_NORMAL:
+        case ExifInterface.ORIENTATION_UNDEFINED:
+        default:
+            break;
         }
+        rotateBitmap = Bitmap.createBitmap(imageBitmap, 0, 0, width, height, mat, true);
         imageView.setImageBitmap(rotateBitmap);
     }
 

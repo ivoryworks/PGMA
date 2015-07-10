@@ -62,13 +62,13 @@ public class ImageRotateFragment extends Fragment {
                 bitmapOctocat, ExifInterface.ORIENTATION_ROTATE_90);
 
         setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel6),
-                bitmapOctocat, ExifInterface.ORIENTATION_TRANSVERSE);
+                bitmapOctocat, ExifInterface.ORIENTATION_TRANSPOSE);
 
         setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel7),
                 bitmapOctocat, ExifInterface.ORIENTATION_ROTATE_180);
 
         setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel8),
-                bitmapOctocat, ExifInterface.ORIENTATION_UNDEFINED);
+                bitmapOctocat, ExifInterface.ORIENTATION_TRANSVERSE);
 
         return view;
     }
