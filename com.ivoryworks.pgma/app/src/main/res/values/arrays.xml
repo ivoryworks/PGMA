@@ -7,5 +7,6 @@
         <item>@string/title_stop_watch</item>
         <item>@string/title_robotium_punchball</item>
         <item>@string/title_image_rotate</item>
+        <item>@string/title_progress_variation</item>
     </string-array>
 </resources>

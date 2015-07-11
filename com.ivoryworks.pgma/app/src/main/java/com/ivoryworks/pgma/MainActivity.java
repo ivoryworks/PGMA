@@ -70,6 +70,10 @@ public class MainActivity extends ActionBarActivity
             tag = ImageRotateFragment.TAG;
             fragment = ImageRotateFragment.newInstance();
             break;
+        case R.string.title_progress_variation:
+            tag = ProgressVariationFragment.TAG;
+            fragment = ProgressVariationFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;

@@ -13,6 +13,7 @@
     <string name="title_stop_watch">Stopwatch</string>
     <string name="title_robotium_punchball">RobotiumPunchball(forTest)</string>
     <string name="title_image_rotate">Image rotate</string>
+    <string name="title_progress_variation">Progress variation</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -23,4 +24,7 @@
 
     <string name="hint_toast_message">Toast message</string>
     <string name="caption_octocat8">octcat 8</string>
+    <string name="caption_spinner">Style SPINNER</string>
+
+    <string name="msg_please_wait">Please wait...</string>
 </resources>
