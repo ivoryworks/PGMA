@@ -24,7 +24,9 @@
 
     <string name="hint_toast_message">Toast message</string>
     <string name="caption_octocat8">octcat 8</string>
+
     <string name="caption_spinner">Style SPINNER</string>
+    <string name="caption_horizontal">Style HORIZONTAL</string>
 
     <string name="msg_please_wait">Please wait...</string>
 </resources>
