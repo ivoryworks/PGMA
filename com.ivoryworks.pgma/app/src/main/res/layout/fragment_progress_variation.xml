@@ -19,4 +19,12 @@
         android:id="@+id/btnStyleHorizontal"
         android:layout_below="@+id/btnStyleSpinner"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/caption_horizontal2nd"
+        android:id="@+id/btnStyleHorizontal_2nd"
+        android:layout_below="@+id/btnStyleHorizontal"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -27,6 +27,7 @@
 
     <string name="caption_spinner">Style SPINNER</string>
     <string name="caption_horizontal">Style HORIZONTAL</string>
+    <string name="caption_horizontal2nd">Style HORIZONTAL(2nd)</string>
 
     <string name="msg_please_wait">Please wait...</string>
 </resources>
