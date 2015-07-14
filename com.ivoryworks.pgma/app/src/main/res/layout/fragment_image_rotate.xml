@@ -13,41 +13,41 @@
         android:columnCount="3">
         <ImageView
             android:id="@+id/gridCel0"
-            android:layout_width="@dimen/image_rotate_cel_width"
-            android:layout_height="@dimen/image_rotate_cel_height"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/gridCel1"
-            android:layout_width="@dimen/image_rotate_cel_width"
-            android:layout_height="@dimen/image_rotate_cel_height"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/gridCel2"
-            android:layout_width="@dimen/image_rotate_cel_width"
-            android:layout_height="@dimen/image_rotate_cel_height"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/gridCel3"
-            android:layout_width="@dimen/image_rotate_cel_width"
-            android:layout_height="@dimen/image_rotate_cel_height"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/gridCel4"
-            android:layout_width="@dimen/image_rotate_cel_width"
-            android:layout_height="@dimen/image_rotate_cel_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/caption_octocat8"/>
         <ImageView
             android:id="@+id/gridCel5"
-            android:layout_width="@dimen/image_rotate_cel_width"
-            android:layout_height="@dimen/image_rotate_cel_height"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/gridCel6"
-            android:layout_width="@dimen/image_rotate_cel_width"
-            android:layout_height="@dimen/image_rotate_cel_height"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/gridCel7"
-            android:layout_width="@dimen/image_rotate_cel_width"
-            android:layout_height="@dimen/image_rotate_cel_height"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/gridCel8"
-            android:layout_width="@dimen/image_rotate_cel_width"
-            android:layout_height="@dimen/image_rotate_cel_height"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </GridLayout>
 </RelativeLayout>

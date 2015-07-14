@@ -28,21 +28,22 @@ public class ImageRotateFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_image_rotate, container, false);
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        float originWidth = options.outWidth;
-        float originHeith = options.outHeight;
-        float gridCelWidth = getResources().getDimensionPixelSize(R.dimen.image_rotate_cel_width);
-        float gridCelHeight = getResources().getDimensionPixelSize(R.dimen.image_rotate_cel_height);
-
-        BitmapFactory.decodeResource(getResources(), R.drawable.octocat, options);
-        if (originWidth >= originHeith) {
-            options.inSampleSize = Math.round(originHeith / gridCelHeight);
-        } else {
-            options.inSampleSize = Math.round(originWidth / gridCelWidth);
-        }
-        options.inJustDecodeBounds = false;
-        Bitmap bitmapOctocat = BitmapFactory.decodeResource(getResources(), R.drawable.octocat, options);
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+//        float originWidth = options.outWidth;
+//        float originHeith = options.outHeight;
+//        float gridCelWidth = getResources().getDimensionPixelSize(R.dimen.image_rotate_cel_width);
+//        float gridCelHeight = getResources().getDimensionPixelSize(R.dimen.image_rotate_cel_height);
+//
+//        BitmapFactory.decodeResource(getResources(), R.drawable.octocat, options);
+//        if (originWidth >= originHeith) {
+//            options.inSampleSize = Math.round(originHeith / gridCelHeight);
+//        } else {
+//            options.inSampleSize = Math.round(originWidth / gridCelWidth);
+//        }
+//        options.inJustDecodeBounds = false;
+//        Bitmap bitmapOctocat = BitmapFactory.decodeResource(getResources(), R.drawable.octocat, options);
+        Bitmap bitmapOctocat = BitmapFactory.decodeResource(getResources(), R.drawable.octocat);
 
         setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel0),
                 bitmapOctocat, ExifInterface.ORIENTATION_FLIP_VERTICAL);
