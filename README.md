@@ -7,3 +7,4 @@ Proving Grounds of The M. A.
 1. Robotium punchball
 1. Image rotate(octocat 8)
 1. Progress variation
+1. Image crop
