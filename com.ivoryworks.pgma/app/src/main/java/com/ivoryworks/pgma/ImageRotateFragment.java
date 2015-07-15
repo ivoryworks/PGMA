@@ -43,7 +43,7 @@ public class ImageRotateFragment extends Fragment {
 //        }
 //        options.inJustDecodeBounds = false;
 //        Bitmap bitmapOctocat = BitmapFactory.decodeResource(getResources(), R.drawable.octocat, options);
-        Bitmap bitmapOctocat = BitmapFactory.decodeResource(getResources(), R.drawable.octocat);
+        Bitmap bitmapOctocat = BitmapFactory.decodeResource(getResources(), R.drawable.octocat_l);
 
         setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel0),
                 bitmapOctocat, ExifInterface.ORIENTATION_FLIP_VERTICAL);

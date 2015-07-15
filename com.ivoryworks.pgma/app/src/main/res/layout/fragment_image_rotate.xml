@@ -31,7 +31,8 @@
             android:id="@+id/gridCel4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
+            android:textStyle="bold"
             android:text="@string/caption_octocat8"/>
         <ImageView
             android:id="@+id/gridCel5"
