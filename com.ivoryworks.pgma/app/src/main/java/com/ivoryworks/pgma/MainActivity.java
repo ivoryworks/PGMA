@@ -74,6 +74,10 @@ public class MainActivity extends ActionBarActivity
             tag = ProgressVariationFragment.TAG;
             fragment = ProgressVariationFragment.newInstance();
             break;
+        case R.string.title_image_crop:
+            tag = ImageCropFragment.TAG;
+            fragment = ImageCropFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;

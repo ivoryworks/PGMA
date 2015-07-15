@@ -8,5 +8,6 @@
         <item>@string/title_robotium_punchball</item>
         <item>@string/title_image_rotate</item>
         <item>@string/title_progress_variation</item>
+        <item>@string/title_image_crop</item>
     </string-array>
 </resources>
