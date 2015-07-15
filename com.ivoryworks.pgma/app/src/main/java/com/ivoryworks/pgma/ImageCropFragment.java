@@ -21,7 +21,7 @@ public class ImageCropFragment extends Fragment {
     private final int CROP_WIDTH = 200;
     private final int CROP_HEIGHT = 200;
 
-    public static String TAG = "ProgressVariationFragment";
+    public static String TAG = "ImageCropFragment";
     private ImageView mImageCrop;
 
     public static ImageCropFragment newInstance() {
