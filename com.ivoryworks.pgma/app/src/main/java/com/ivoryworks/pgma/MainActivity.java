@@ -78,6 +78,10 @@ public class MainActivity extends ActionBarActivity
             tag = ImageCropFragment.TAG;
             fragment = ImageCropFragment.newInstance();
             break;
+        case R.string.title_image_mix:
+            tag = ImageMixFragment.TAG;
+            fragment = ImageMixFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;
