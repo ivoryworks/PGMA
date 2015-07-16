@@ -60,7 +60,7 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
             if (imageFile.exists()) {
                 Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
                 int orientation = Utils.getOrientationType(imagePath);
-                Utils.setBitmap2ImageView(mPreviewPhoto, photoBitmap, orientation);
+                mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
             }
         }
 
@@ -111,7 +111,7 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
 
                 Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
                 int orientation = Utils.getOrientationType(imagePath);
-                Utils.setBitmap2ImageView(mPreviewPhoto, photoBitmap, orientation);
+                mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
             }
             break;
         }

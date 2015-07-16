@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import static com.ivoryworks.pgma.Utils.setBitmap2ImageView;
-
 public class ImageRotateFragment extends Fragment {
 
     public static String TAG = "ImageRotateFragment";
@@ -45,31 +43,31 @@ public class ImageRotateFragment extends Fragment {
 //        Bitmap bitmapOctocat = BitmapFactory.decodeResource(getResources(), R.drawable.octocat, options);
         Bitmap bitmapOctocat = BitmapFactory.decodeResource(getResources(), R.drawable.octocat_l);
 
-        setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel0),
-                bitmapOctocat, ExifInterface.ORIENTATION_FLIP_VERTICAL);
+        ImageView imageView = (ImageView) view.findViewById(R.id.gridCel0);
+        imageView.setImageBitmap(Utils.rotateBitmap(bitmapOctocat, ExifInterface.ORIENTATION_FLIP_VERTICAL));
 
-        setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel1),
-                bitmapOctocat, ExifInterface.ORIENTATION_NORMAL);
+        imageView = (ImageView) view.findViewById(R.id.gridCel1);
+        imageView.setImageBitmap(Utils.rotateBitmap(bitmapOctocat, ExifInterface.ORIENTATION_NORMAL));
 
-        setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel2),
-                bitmapOctocat, ExifInterface.ORIENTATION_FLIP_HORIZONTAL);
+        imageView = (ImageView) view.findViewById(R.id.gridCel2);
+        imageView.setImageBitmap(Utils.rotateBitmap(bitmapOctocat, ExifInterface.ORIENTATION_FLIP_HORIZONTAL));
 
-        setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel3),
-                bitmapOctocat, ExifInterface.ORIENTATION_ROTATE_270);
+        imageView = (ImageView) view.findViewById(R.id.gridCel3);
+        imageView.setImageBitmap(Utils.rotateBitmap(bitmapOctocat, ExifInterface.ORIENTATION_ROTATE_270));
 
         // R.id.gridCel4 is TextView
 
-        setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel5),
-                bitmapOctocat, ExifInterface.ORIENTATION_ROTATE_90);
+        imageView = (ImageView) view.findViewById(R.id.gridCel5);
+        imageView.setImageBitmap(Utils.rotateBitmap(bitmapOctocat, ExifInterface.ORIENTATION_ROTATE_90));
 
-        setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel6),
-                bitmapOctocat, ExifInterface.ORIENTATION_TRANSPOSE);
+        imageView = (ImageView) view.findViewById(R.id.gridCel6);
+        imageView.setImageBitmap(Utils.rotateBitmap(bitmapOctocat, ExifInterface.ORIENTATION_TRANSPOSE));
 
-        setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel7),
-                bitmapOctocat, ExifInterface.ORIENTATION_ROTATE_180);
+        imageView = (ImageView) view.findViewById(R.id.gridCel7);
+        imageView.setImageBitmap(Utils.rotateBitmap(bitmapOctocat, ExifInterface.ORIENTATION_ROTATE_180));
 
-        setBitmap2ImageView((ImageView) view.findViewById(R.id.gridCel8),
-                bitmapOctocat, ExifInterface.ORIENTATION_TRANSVERSE);
+        imageView = (ImageView) view.findViewById(R.id.gridCel8);
+        imageView.setImageBitmap(Utils.rotateBitmap(bitmapOctocat, ExifInterface.ORIENTATION_TRANSVERSE));
 
         return view;
     }

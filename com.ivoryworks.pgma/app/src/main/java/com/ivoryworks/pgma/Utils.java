@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.widget.ImageView;
 
 import java.io.IOException;
 
@@ -62,10 +61,6 @@ public class Utils {
                 break;
         }
         return Bitmap.createBitmap(imageBitmap, 0, 0, width, height, mat, true);
-    }
-
-    public static void setBitmap2ImageView(ImageView imageView, Bitmap imageBitmap, int orientationType) {
-        imageView.setImageBitmap(rotateBitmap(imageBitmap, orientationType));
     }
 
     @SuppressLint("NewApi")
