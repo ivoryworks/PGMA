@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class RobotiumPunchballFragment extends Fragment implements View.OnClickListener {
 
-    public static String TAG = "RobotiumPunchballFragment";
+    public static String TAG = RobotiumPunchballFragment.class.getSimpleName();
     Button mToastButton;
     Toast mToast;
     EditText mToastText;

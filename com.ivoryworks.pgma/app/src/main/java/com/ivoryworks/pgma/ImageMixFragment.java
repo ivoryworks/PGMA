@@ -19,7 +19,7 @@ import java.io.InputStream;
 
 public class ImageMixFragment extends Fragment {
 
-    public static String TAG = "ImageMixFragment";
+    public static String TAG = ImageMixFragment.class.getSimpleName();
     private ImageView mImageMix;
 
     public static ImageMixFragment newInstance() {

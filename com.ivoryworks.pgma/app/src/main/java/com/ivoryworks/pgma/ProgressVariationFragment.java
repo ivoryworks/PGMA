@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class ProgressVariationFragment extends Fragment {
 
-    public static String TAG = "ProgressVariationFragment";
+    public static String TAG = ProgressVariationFragment.class.getSimpleName();
     private static ProgressDialog mDialog;
 
     public static ProgressVariationFragment newInstance() {

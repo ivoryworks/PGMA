@@ -14,7 +14,7 @@ import android.widget.ToggleButton;
 
 public class StopwatchFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
-    public static String TAG = "StopwatchFragment";
+    public static String TAG = StopwatchFragment.class.getSimpleName();
     private static StopwatchTask mStopwatchTask = null;
     private long mMSecCount;
     private TextView mDigitText;

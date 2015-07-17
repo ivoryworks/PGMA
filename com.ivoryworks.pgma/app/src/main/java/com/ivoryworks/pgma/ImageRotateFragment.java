@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 public class ImageRotateFragment extends Fragment {
 
-    public static String TAG = "ImageRotateFragment";
+    public static String TAG = ImageRotateFragment.class.getSimpleName();
 
     public static ImageRotateFragment newInstance() {
         return new ImageRotateFragment();

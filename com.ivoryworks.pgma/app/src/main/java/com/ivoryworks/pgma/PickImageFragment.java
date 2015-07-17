@@ -17,7 +17,7 @@ import java.io.File;
 
 public class PickImageFragment extends Fragment implements View.OnClickListener {
 
-    public static String TAG = "PickImageFragment";
+    public static String TAG = PickImageFragment.class.getSimpleName();
     private final int REQ_CODE_ACTION_OPEN_DOCUMENT = 1;
     private final String PREF_NAME_IMAGE_PATH = TAG + "_ImagePath";
     private PreferencesManager mPreferencesManager;

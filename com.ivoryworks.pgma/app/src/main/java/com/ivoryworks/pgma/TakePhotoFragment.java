@@ -20,7 +20,7 @@ import java.util.Date;
 
 public class TakePhotoFragment extends Fragment implements View.OnClickListener {
 
-    public static String TAG = "TakePhotoFragment";
+    public static String TAG = TakePhotoFragment.class.getSimpleName();
     private final int REQ_CODE_ACTION_IMAGE_CAPTURE = 1;
     private final String PREF_NAME_IMAGE_PATH = TAG + "_ImagePath";
     private Uri mPhotoUri;

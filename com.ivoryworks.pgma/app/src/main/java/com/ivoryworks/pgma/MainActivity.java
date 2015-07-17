@@ -115,7 +115,7 @@ public class MainActivity extends ActionBarActivity
      */
     public static class PlaceholderFragment extends Fragment {
 
-        public static String TAG = "PlaceholderFragment";
+        public static String TAG = PlaceholderFragment.class.getSimpleName();
 
         public static PlaceholderFragment newInstance() {
             PlaceholderFragment fragment = new PlaceholderFragment();
