@@ -10,5 +10,6 @@
         <item>@string/title_progress_variation</item>
         <item>@string/title_image_crop</item>
         <item>@string/title_image_mix</item>
+        <item>@string/title_touch</item>
     </string-array>
 </resources>
