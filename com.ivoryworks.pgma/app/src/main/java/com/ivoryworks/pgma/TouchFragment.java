@@ -35,8 +35,10 @@ public class TouchFragment extends Fragment implements View.OnTouchListener{
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        String logLine = String.format("x:%f y:%f\n", motionEvent.getX(), motionEvent.getY());
+        String logLine = String.format("%s x:%f y:%f\n",
+                Utils.actionToString(motionEvent.getAction()),
+                motionEvent.getX(), motionEvent.getY());
         mLogText.setText(logLine + mLogText.getText());
-        return false;
+        return true;
     }
 }

@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.view.MotionEvent;
 
 import java.io.IOException;
 
@@ -168,5 +169,22 @@ public class Utils {
 
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
+
+    public static String actionToString(int action) {
+        switch(action) {
+            case MotionEvent.ACTION_CANCEL:
+                return "CANCEL";
+            case MotionEvent.ACTION_DOWN:
+                return "DOWN";
+            case MotionEvent.ACTION_MOVE:
+                return "MOVE";
+            case MotionEvent.ACTION_OUTSIDE:
+                return "OUTSIDE";
+            case MotionEvent.ACTION_UP:
+                return "UP";
+            default:
+                return "UNKNOWN";
+        }
     }
 }
