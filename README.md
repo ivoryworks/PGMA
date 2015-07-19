@@ -9,3 +9,4 @@ Proving Grounds of The M. A.
 1. Progress variation
 1. Image crop
 1. Image mix
+1. Touch
