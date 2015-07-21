@@ -86,6 +86,10 @@ public class MainActivity extends ActionBarActivity
             tag = TouchFragment.TAG;
             fragment = TouchFragment.newInstance();
             break;
+        case R.string.title_gesture:
+            tag = GestureFragment.TAG;
+            fragment = GestureFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;

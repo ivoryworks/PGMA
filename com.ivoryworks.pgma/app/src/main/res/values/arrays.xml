@@ -11,5 +11,6 @@
         <item>@string/title_image_crop</item>
         <item>@string/title_image_mix</item>
         <item>@string/title_touch</item>
+        <item>@string/title_gesture</item>
     </string-array>
 </resources>
