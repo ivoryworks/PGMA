@@ -59,7 +59,8 @@ public class GestureFragment extends Fragment implements View.OnTouchListener, G
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        mLogText.setText("Scroll\n" + mLogText.getText());
+        String formated = String.format("Scroll (dist:%f, %f)\n",distanceX, distanceY);
+        mLogText.setText(formated + mLogText.getText());
         return false;
     }
 
@@ -70,7 +71,8 @@ public class GestureFragment extends Fragment implements View.OnTouchListener, G
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        mLogText.setText("Fling\n" + mLogText.getText());
+        String formated = String.format("Fling (velocity:%f, %f)\n", velocityX, velocityY);
+        mLogText.setText(formated + mLogText.getText());
         return false;
     }
 }
