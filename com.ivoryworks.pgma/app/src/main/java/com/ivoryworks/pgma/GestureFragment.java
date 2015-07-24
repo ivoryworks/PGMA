@@ -29,7 +29,7 @@ public class GestureFragment extends Fragment implements View.OnTouchListener, G
 
         mLogText = (TextView) view.findViewById(R.id.touchLog);
         mLogText.setOnTouchListener(this);
-        mGestureDetector = new GestureDetector(this);
+        mGestureDetector = new GestureDetector(getActivity(), this);
 
         return view;
     }
