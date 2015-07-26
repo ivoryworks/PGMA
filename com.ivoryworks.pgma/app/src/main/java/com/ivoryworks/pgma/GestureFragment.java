@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class GestureFragment extends Fragment implements View.OnTouchListener, GestureDetector.OnGestureListener{
 
     public static String TAG = GestureFragment.class.getSimpleName();
     private TextView mLogText;
+    private ImageView mOctocat;
     private GestureDetector mGestureDetector;
 
     public static GestureFragment newInstance() {
@@ -27,6 +29,7 @@ public class GestureFragment extends Fragment implements View.OnTouchListener, G
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gesture, container, false);
 
+        mOctocat = (ImageView) view.findViewById(R.id.octocat);
         mLogText = (TextView) view.findViewById(R.id.touchLog);
         mLogText.setOnTouchListener(this);
         mGestureDetector = new GestureDetector(getActivity(), this);
@@ -59,6 +62,9 @@ public class GestureFragment extends Fragment implements View.OnTouchListener, G
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        mOctocat.setX(mOctocat.getX() - distanceX);
+        mOctocat.setY(mOctocat.getY() - distanceY);
+
         String formated = String.format("Scroll (dist:%f, %f)\n",distanceX, distanceY);
         mLogText.setText(formated + mLogText.getText());
         return false;
