@@ -8,27 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
-
-import com.ivoryworks.pgma.dummy.DummyContent;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class FrameworkDrawableFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     public static String TAG = FrameworkDrawableFragment.class.getSimpleName();
     private AbsListView mListView;
-    private ListAdapter mAdapter;
+    private FrameworkDrawalbeAdapter mAdapter;
 
     public static FrameworkDrawableFragment newInstance() {
         return new FrameworkDrawableFragment();
     }
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public FrameworkDrawableFragment() {
     }
 
@@ -36,9 +30,7 @@ public class FrameworkDrawableFragment extends Fragment implements AbsListView.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+        mAdapter = new FrameworkDrawalbeAdapter(getActivity());
     }
 
     @Override
@@ -48,9 +40,24 @@ public class FrameworkDrawableFragment extends Fragment implements AbsListView.O
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
-        // Set OnItemClickListener so we can be notified on item clicks
+        ArrayList<FrameworkDrawable> list = new ArrayList<>();
+
+        Field[] drawables = android.R.drawable.class.getFields();
+        for (Field f : drawables) {
+            try {
+                FrameworkDrawable item = new FrameworkDrawable();
+                item.setResId(getActivity().getResources().getIdentifier(f.getName(), "drawable", "android"));
+                item.setResName("R.drawable." + f.getName());
+                list.add(item);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        mAdapter.setDrawableList(list);
+        mListView.setAdapter(mAdapter);
+
         mListView.setOnItemClickListener(this);
 
         return view;
