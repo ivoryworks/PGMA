@@ -18,6 +18,7 @@
     <string name="title_image_mix">Image mix</string>
     <string name="title_touch">Touch</string>
     <string name="title_gesture">Gesture</string>
+    <string name="title_fw_drawable">FW Drawable</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
