@@ -9,6 +9,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -43,6 +46,27 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         mPreferencesManager = PreferencesManager.newInstance(getActivity());
         mPreferencesManager.remove(PREF_NAME_IMAGE_PATH);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        getActivity().getMenuInflater().inflate(R.menu.share_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean ret = true;
+
+        switch (item.getItemId()){
+            case R.id.menu_item_share:
+                break;
+            default:
+                ret = super.onOptionsItemSelected(item);
+                break;
+        }
+        return ret;
     }
 
     @Override
