@@ -94,6 +94,10 @@ public class MainActivity extends ActionBarActivity
             tag = FrameworkDrawableFragment.TAG;
             fragment = FrameworkDrawableFragment.newInstance();
             break;
+        case R.string.title_media_effects:
+            tag = MediaEffectsFragment.TAG;
+            fragment = MediaEffectsFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;

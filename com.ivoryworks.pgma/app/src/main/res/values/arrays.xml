@@ -13,5 +13,6 @@
         <item>@string/title_touch</item>
         <item>@string/title_gesture</item>
         <item>@string/title_fw_drawable</item>
+        <item>@string/title_media_effects</item>
     </string-array>
 </resources>
