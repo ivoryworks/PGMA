@@ -65,11 +65,7 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         case R.id.menu_item_share:
             String imgPath = mPreferencesManager.getString(PREF_NAME_IMAGE_PATH);
             if (imgPath == null || imgPath.isEmpty()) {
-                if (mToast != null) {
-                    mToast.cancel();
-                }
-                mToast = Toast.makeText(getActivity(), R.string.msg_share_file_not_fond, Toast.LENGTH_SHORT);
-                mToast.show();
+                Utils.showToast(getActivity(), mToast, R.string.msg_share_file_not_fond, Toast.LENGTH_SHORT);
                 break;
             }
             Intent share = new Intent(Intent.ACTION_SEND);

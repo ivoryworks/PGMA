@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -186,5 +187,14 @@ public class Utils {
             default:
                 return "UNKNOWN";
         }
+    }
+
+    public static Toast showToast(Context context, Toast toast, int messageId, int lengthType) {
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(context, messageId, lengthType);
+        toast.show();
+        return toast;
     }
 }
