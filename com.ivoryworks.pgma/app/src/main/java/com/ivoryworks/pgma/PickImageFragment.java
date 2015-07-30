@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -25,6 +26,7 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
     private final String PREF_NAME_IMAGE_PATH = TAG + "_ImagePath";
     private PreferencesManager mPreferencesManager;
     private ImageView mPreviewPhoto;
+    private Toast mToast;
 
     /**
      * Use this factory method to create a new instance of
@@ -60,11 +62,24 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         boolean ret = true;
 
         switch (item.getItemId()){
-            case R.id.menu_item_share:
+        case R.id.menu_item_share:
+            String imgPath = mPreferencesManager.getString(PREF_NAME_IMAGE_PATH);
+            if (imgPath == null || imgPath.isEmpty()) {
+                if (mToast != null) {
+                    mToast.cancel();
+                }
+                mToast = Toast.makeText(getActivity(), R.string.msg_share_file_not_fond, Toast.LENGTH_SHORT);
+                mToast.show();
                 break;
-            default:
-                ret = super.onOptionsItemSelected(item);
-                break;
+            }
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("image/jpeg");
+            share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + imgPath));
+            startActivity(Intent.createChooser(share, "Share Image"));
+            break;
+        default:
+            ret = super.onOptionsItemSelected(item);
+            break;
         }
         return ret;
     }

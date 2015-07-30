@@ -37,4 +37,5 @@
     <string name="caption_horizontal2nd">Style HORIZONTAL(2nd)</string>
 
     <string name="msg_please_wait">Please wait...</string>
+    <string name="msg_share_file_not_fond">Share file can not be found.</string>
 </resources>
