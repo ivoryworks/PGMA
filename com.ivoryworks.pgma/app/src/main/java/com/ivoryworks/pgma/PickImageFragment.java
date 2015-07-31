@@ -89,16 +89,23 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         layoutView.findViewById(R.id.btnGallery).setOnClickListener(this);
         mPreviewPhoto = (ImageView) layoutView.findViewById(R.id.previewPhoto);
 
-        String imagePath = mPreferencesManager.getString(PREF_NAME_IMAGE_PATH);
-        if (imagePath != null && imagePath.isEmpty() != true) {
-            File imageFile = new File(imagePath);
-            if (imageFile.exists()) {
-                Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
-                int orientation = Utils.getOrientationType(imagePath);
-                mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
+        Intent intent = getActivity().getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+        if (Intent.ACTION_SEND.equals(action) && type.equals("image/*")) {
+            Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            setImage(uri);
+        } else {
+            String imagePath = mPreferencesManager.getString(PREF_NAME_IMAGE_PATH);
+            if (imagePath != null && imagePath.isEmpty() != true) {
+                File imageFile = new File(imagePath);
+                if (imageFile.exists()) {
+                    Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
+                    int orientation = Utils.getOrientationType(imagePath);
+                    mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
+                }
             }
         }
-
         return layoutView;
     }
 
@@ -138,17 +145,20 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         switch (requestCode) {
         case REQ_CODE_ACTION_OPEN_DOCUMENT:
             if (resultCode == Activity.RESULT_OK) {
-                Uri imageUri = data.getData();
-                String imagePath = Utils.getPath(getActivity(), imageUri);
-
-                // Save file path
-                mPreferencesManager.setString(PREF_NAME_IMAGE_PATH, imagePath);
-
-                Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
-                int orientation = Utils.getOrientationType(imagePath);
-                mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
+                setImage(data.getData());
             }
             break;
         }
+    }
+
+    private void setImage(Uri imageUri) {
+        String imagePath = Utils.getPath(getActivity(), imageUri);
+
+        // Save file path
+        mPreferencesManager.setString(PREF_NAME_IMAGE_PATH, imagePath);
+
+        Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
+        int orientation = Utils.getOrientationType(imagePath);
+        mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
     }
 }

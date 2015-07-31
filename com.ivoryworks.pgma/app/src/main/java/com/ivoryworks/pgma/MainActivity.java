@@ -1,6 +1,7 @@
 package com.ivoryworks.pgma;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +21,7 @@ public class MainActivity extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private FragmentManager mFragmentManager;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -29,6 +31,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -39,12 +42,21 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+        if (Intent.ACTION_SEND.equals(action) && type.equals("image/*")) {
+            PickImageFragment.newInstance();
+            Fragment fragment = PickImageFragment.newInstance();
+            fragment.setRetainInstance(true);
+            mFragmentManager.beginTransaction().replace(R.id.container, fragment, PickImageFragment.TAG).commit();
+        }
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
         int itemId = NavigationDrawerFragment.getPositionToId(getBaseContext(), position);
         mTitle = getString(itemId);
         Fragment fragment;
@@ -104,9 +116,9 @@ public class MainActivity extends ActionBarActivity
             fragment = PlaceholderFragment.newInstance();
             break;
         }
-        if (fragmentManager.findFragmentByTag(tag) == null) {
+        if (mFragmentManager.findFragmentByTag(tag) == null) {
             fragment.setRetainInstance(true);
-            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
+            mFragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
         }
     }
 
