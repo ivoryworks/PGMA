@@ -1,5 +1,5 @@
 #PGMA
-Proving Grounds of The M. A.
+Proving Grounds of the Mad Android
 
 1. Take photo
 1. Pick image
