@@ -5,4 +5,5 @@ package com.ivoryworks.pgma;
  */
 public class Constants {
     public static final String OCTOCAT_FILENAME = "octocat.png";
+    public static final String BEETLE_FILENAME = "beetle.jpg";
 }

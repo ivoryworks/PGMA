@@ -1,5 +1,6 @@
 package com.ivoryworks.pgma;
 
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.effect.EffectContext;
@@ -14,6 +15,9 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Renderer {
 
@@ -69,17 +73,24 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
     private void loadTextures() {
         // Generate textures
         GLES20.glGenTextures(2, mTextures, 0);
-        // Load input bitmap
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-                R.drawable.octocat_l);
-        mImageWidth = bitmap.getWidth();
-        mImageHeight = bitmap.getHeight();
-        mTexRenderer.updateTextureSize(mImageWidth, mImageHeight);
-        // Upload to texture
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextures[0]);
-        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
-        // Set texture parameters
-        GLToolbox.initTexParams();
+        AssetManager manager = getResources().getAssets();
+        try {
+            // Load input bitmap
+            InputStream inputStreamBase = manager.open(Constants.BEETLE_FILENAME);
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStreamBase);
+            mImageWidth = bitmap.getWidth();
+            mImageHeight = bitmap.getHeight();
+            mTexRenderer.updateTextureSize(mImageWidth, mImageHeight);
+
+            // Upload to texture
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextures[0]);
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+            // Set texture parameters
+            GLToolbox.initTexParams();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void renderResult() {
