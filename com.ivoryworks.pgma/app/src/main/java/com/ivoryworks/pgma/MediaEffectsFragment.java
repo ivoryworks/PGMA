@@ -3,11 +3,16 @@ package com.ivoryworks.pgma;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.effect.Effect;
 import android.media.effect.EffectContext;
+import android.media.effect.EffectFactory;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,12 +33,34 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
     private TextureRenderer mTexRenderer = new TextureRenderer();
     private int mImageWidth;
     private int mImageHeight;
+    private Effect mEffect;
+    private int mCurrentEffect;
 
     public static MediaEffectsFragment newInstance() {
         return new MediaEffectsFragment();
     }
 
     public MediaEffectsFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        getActivity().getMenuInflater().inflate(R.menu.effects_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        mCurrentEffect = item.getItemId();
+//        initEffect(mCurrentEffect);
+        mEffectView.requestRender();
+        return true;
     }
 
     @Override
@@ -44,7 +71,7 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
         mEffectView.setEGLContextClientVersion(2);
         mEffectView.setRenderer(this);
         mEffectView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-
+        mCurrentEffect = R.id.none;
         return view;
     }
 
@@ -66,6 +93,10 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
             mEffectContext = EffectContext.createWithCurrentGlContext();
             mTexRenderer.init();
             loadTextures();
+        }
+        if (mCurrentEffect != R.id.none) {
+            initEffect(mCurrentEffect);
+            applyEffect();
         }
         renderResult();
     }
@@ -94,6 +125,34 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
     }
 
     private void renderResult() {
-        mTexRenderer.renderTexture(mTextures[0]);
+        if (mCurrentEffect != R.id.none) {
+            // if no effect is chosen, just render the original bitmap
+            mTexRenderer.renderTexture(mTextures[1]);
+        } else {
+            // render the result of applyEffect()
+            mTexRenderer.renderTexture(mTextures[0]);
+        }
+    }
+
+    private void initEffect(int effectMenuId) {
+        EffectFactory effectFactory = mEffectContext.getFactory();
+        if (mEffect != null) {
+            mEffect.release();
+        }
+
+        switch (effectMenuId){
+            case R.id.menu_item_lomoish:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_LOMOISH);
+                break;
+            case R.id.menu_item_negative:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_NEGATIVE);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void applyEffect() {
+        mEffect.apply(mTextures[0], mImageWidth, mImageHeight, mTextures[1]);
     }
 }
