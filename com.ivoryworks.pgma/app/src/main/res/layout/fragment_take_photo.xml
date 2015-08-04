@@ -16,6 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnCamera"
-        android:src="@android:drawable/ic_menu_camera"
+        android:src="@drawable/ic_photo_camera_white_36dp"
         android:layout_gravity="center_horizontal|bottom" />
 </FrameLayout>
