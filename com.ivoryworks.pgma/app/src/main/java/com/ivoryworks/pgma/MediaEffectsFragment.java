@@ -27,6 +27,7 @@ import java.io.InputStream;
 public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Renderer {
 
     public static String TAG = MediaEffectsFragment.class.getSimpleName();
+    private static final String STATE_CURRENT_EFFECT = "current_effect";
     private GLSurfaceView mEffectView;
     private int[] mTextures = new int[2];
     private EffectContext  mEffectContext;
@@ -35,6 +36,7 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
     private int mImageHeight;
     private Effect mEffect;
     private int mCurrentEffect;
+    private boolean mInitialized = false;
 
     public static MediaEffectsFragment newInstance() {
         return new MediaEffectsFragment();
@@ -50,6 +52,11 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(STATE_CURRENT_EFFECT, mCurrentEffect);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         getActivity().getMenuInflater().inflate(R.menu.effects_menu, menu);
@@ -58,7 +65,6 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         mCurrentEffect = item.getItemId();
-//        initEffect(mCurrentEffect);
         mEffectView.requestRender();
         return true;
     }
@@ -71,7 +77,12 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
         mEffectView.setEGLContextClientVersion(2);
         mEffectView.setRenderer(this);
         mEffectView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-        mCurrentEffect = R.id.none;
+        mInitialized = false;
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_CURRENT_EFFECT)) {
+            mCurrentEffect = savedInstanceState.getInt(STATE_CURRENT_EFFECT);
+        } else {
+            mCurrentEffect = R.id.none;
+        }
         return view;
     }
 
@@ -89,10 +100,11 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        if (mEffectContext == null) {
+        if (mInitialized == false) {
             mEffectContext = EffectContext.createWithCurrentGlContext();
             mTexRenderer.init();
             loadTextures();
+            mInitialized = true;
         }
         if (mCurrentEffect != R.id.none) {
             initEffect(mCurrentEffect);
