@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="pgma_dark">#FF303033</color>
+    <color name="fab_red">#FF993333</color>
 
     <color name="background_dark">@color/pgma_dark</color>
 </resources>

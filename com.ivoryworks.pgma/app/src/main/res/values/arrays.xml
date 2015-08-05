@@ -14,5 +14,6 @@
         <item>@string/title_gesture</item>
         <item>@string/title_fw_drawable</item>
         <item>@string/title_media_effects</item>
+        <item>@string/title_fab</item>
     </string-array>
 </resources>
