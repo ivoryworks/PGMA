@@ -1,6 +1,7 @@
 package com.ivoryworks.pgma;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -85,11 +86,24 @@ public class FABFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
         case R.id.btnFab:
-            mPhotoUri = createPhotoUri();
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.addCategory(Intent.CATEGORY_DEFAULT);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoUri);
-            startActivityForResult(intent, REQ_CODE_ACTION_IMAGE_CAPTURE);
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+            String filename = System.currentTimeMillis() + ".jpg";
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.TITLE, filename);
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+            mPhotoUri = getActivity().getContentResolver()
+                    .insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+            Intent camIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            camIntent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoUri);
+
+            Intent chooserIntent = Intent.createChooser(intent, "Pick Image");
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{camIntent});
+
+            startActivityForResult(chooserIntent, REQ_CODE_ACTION_IMAGE_CAPTURE);
             break;
         default:
             break;
@@ -101,7 +115,9 @@ public class FABFragment extends Fragment implements View.OnClickListener {
         switch (requestCode) {
         case REQ_CODE_ACTION_IMAGE_CAPTURE:
             if (resultCode == Activity.RESULT_OK) {
-                String imagePath = Utils.getPath(getActivity(), mPhotoUri);
+                Uri resultUri = (data == null) ? mPhotoUri : data.getData();
+
+                String imagePath = Utils.getPath(getActivity(), resultUri);
 
                 // Save file path
                 mPreferencesManager.setString(PREF_NAME_IMAGE_PATH, imagePath);
@@ -109,6 +125,11 @@ public class FABFragment extends Fragment implements View.OnClickListener {
                 Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
                 int orientation = Utils.getOrientationType(imagePath);
                 mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
+            } else {
+                if (mPhotoUri != null) {
+                    getActivity().getContentResolver().delete(mPhotoUri, null, null);
+                    mPhotoUri = null;
+                }
             }
             break;
         }
