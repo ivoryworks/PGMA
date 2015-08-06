@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -122,7 +123,10 @@ public class MainActivity extends ActionBarActivity
         }
         if (mFragmentManager.findFragmentByTag(tag) == null) {
             fragment.setRetainInstance(true);
-            mFragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
+            transaction.replace(R.id.container, fragment, tag);
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
     }
 
