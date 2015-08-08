@@ -131,6 +131,7 @@ public class MainActivity extends ActionBarActivity
             transaction.replace(R.id.container, fragment, tag);
             transaction.addToBackStack(null);
             transaction.commit();
+            restoreActionBar();
         }
     }
 
