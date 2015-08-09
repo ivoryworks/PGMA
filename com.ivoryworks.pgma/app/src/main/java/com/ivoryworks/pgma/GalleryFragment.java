@@ -94,7 +94,7 @@ public class GalleryFragment extends Fragment implements LoaderManager.LoaderCal
             ViewHolder holder = (ViewHolder) view.getTag();
 
             final long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
-            Bitmap thumbnail = MediaStore.Images.Thumbnails.getThumbnail(getActivity().getContentResolver(), id, MediaStore.Images.Thumbnails.MINI_KIND, null);
+            Bitmap thumbnail = MediaStore.Images.Thumbnails.getThumbnail(getActivity().getContentResolver(), id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
             if (thumbnail != null) {
                 holder.imageView.setImageBitmap(thumbnail);
             }
