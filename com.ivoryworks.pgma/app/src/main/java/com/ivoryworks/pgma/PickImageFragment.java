@@ -92,7 +92,7 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         Intent intent = getActivity().getIntent();
         String action = intent.getAction();
         String type = intent.getType();
-        if (Intent.ACTION_SEND.equals(action) && type.equals("image/*")) {
+        if (Intent.ACTION_SEND.equals(action)) {
             Uri uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             setImage(uri);
         } else {

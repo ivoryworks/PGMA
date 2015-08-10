@@ -47,7 +47,7 @@ public class MainActivity extends ActionBarActivity
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
-        if (Intent.ACTION_SEND.equals(action) && type.equals("image/*")) {
+        if (Intent.ACTION_SEND.equals(action)) {
             PickImageFragment.newInstance();
             Fragment fragment = PickImageFragment.newInstance();
             fragment.setRetainInstance(true);
