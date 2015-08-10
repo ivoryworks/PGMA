@@ -1,5 +1,6 @@
 package com.ivoryworks.pgma;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -93,8 +94,12 @@ public class GalleryFragment extends Fragment implements LoaderManager.LoaderCal
         public void bindView(View view, Context context, Cursor cursor) {
             ViewHolder holder = (ViewHolder) view.getTag();
 
+            ContentResolver cr = getActivity().getContentResolver();
             final long id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
-            Bitmap thumbnail = MediaStore.Images.Thumbnails.getThumbnail(getActivity().getContentResolver(), id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
+            final int angle = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.ORIENTATION));
+            final int orientationType = Utils.angleToOrientationType(angle);
+            Bitmap thumbnail = Utils.rotateBitmap(MediaStore.Images.Thumbnails.getThumbnail(cr, id,
+                    MediaStore.Images.Thumbnails.MICRO_KIND, null), orientationType);
             if (thumbnail != null) {
                 holder.imageView.setImageBitmap(thumbnail);
             }

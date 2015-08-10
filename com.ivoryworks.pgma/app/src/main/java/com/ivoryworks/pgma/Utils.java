@@ -29,7 +29,24 @@ public class Utils {
         return exifIf.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
     }
 
+    public static int angleToOrientationType(int angle) {
+        switch (angle) {
+            case 90:
+                return ExifInterface.ORIENTATION_ROTATE_90;
+            case 180:
+                return ExifInterface.ORIENTATION_ROTATE_180;
+            case 270:
+                return ExifInterface.ORIENTATION_ROTATE_270;
+            case 0:
+            default:
+                return ExifInterface.ORIENTATION_NORMAL;
+        }
+    }
+
     public static Bitmap rotateBitmap(Bitmap imageBitmap, int orientationType) {
+        if (imageBitmap == null) {
+            return null;
+        }
         int width = imageBitmap.getWidth();
         int height = imageBitmap.getHeight();
         Matrix mat = new Matrix();
