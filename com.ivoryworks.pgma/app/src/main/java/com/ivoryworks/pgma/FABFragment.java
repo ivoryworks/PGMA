@@ -5,7 +5,9 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -87,8 +89,14 @@ public class FABFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
         case R.id.btnFab:
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            if (Build.VERSION.SDK_INT < Constants.KITKAT_API_LV) {
+                intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+            } else {
+                intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("image/jpeg");
+            }
 
             String filename = System.currentTimeMillis() + ".jpg";
             ContentValues values = new ContentValues();
@@ -116,8 +124,13 @@ public class FABFragment extends Fragment implements View.OnClickListener {
         case REQ_CODE_ACTION_IMAGE_CAPTURE:
             if (resultCode == Activity.RESULT_OK) {
                 Uri resultUri = (data == null) ? mPhotoUri : data.getData();
-
+                if (resultUri == null) {
+                    return;
+                }
                 String imagePath = Utils.getPath(getActivity(), resultUri);
+
+                MediaScannerConnection.scanFile(getActivity(), new String[]{resultUri.getPath()},
+                        new String[]{"image/jpeg"}, null);
 
                 // Save file path
                 mPreferencesManager.setString(PREF_NAME_IMAGE_PATH, imagePath);
