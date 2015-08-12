@@ -22,6 +22,7 @@
     <string name="title_media_effects">Media Effects</string>
     <string name="title_fab">Floating Action Button</string>
     <string name="title_gallery">Gallery</string>
+    <string name="title_scale_type">ScaleType</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

@@ -119,6 +119,10 @@ public class MainActivity extends ActionBarActivity
             tag = GalleryFragment.TAG;
             fragment = GalleryFragment.newInstance();
             break;
+        case R.string.title_scale_type:
+            tag = ScaleTypeFragment.TAG;
+            fragment = ScaleTypeFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;
