@@ -1,5 +1,7 @@
 #PGMA
-Proving Grounds of the Mad Android
+Proving Grounds of the Mad Android  
+Min version:16(Jelly Bean)  
+Target version:22(Lollipop)
 
 1. Take photo
 1. Pick image
