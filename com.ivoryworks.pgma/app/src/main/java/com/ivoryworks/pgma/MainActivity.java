@@ -63,10 +63,6 @@ public class MainActivity extends ActionBarActivity
         Fragment fragment;
         String tag;
         switch (itemId) {
-        case R.string.title_take_photo:
-            tag = TakePhotoFragment.TAG;
-            fragment = TakePhotoFragment.newInstance();
-            break;
         case R.string.title_pick_image:
             tag = PickImageFragment.TAG;
             fragment = PickImageFragment.newInstance();

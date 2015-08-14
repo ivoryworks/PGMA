@@ -8,7 +8,6 @@
     <string name="btn_toast">View toast</string>
 
     <string name="title_top">Top</string>
-    <string name="title_take_photo">Take photo</string>
     <string name="title_pick_image">Pick image</string>
     <string name="title_stop_watch">Stopwatch</string>
     <string name="title_robotium_punchball">RobotiumPunchball(forTest)</string>

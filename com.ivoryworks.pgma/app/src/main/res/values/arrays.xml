@@ -2,7 +2,6 @@
 <resources>
     <string-array name="navigation_drawer_title">
         <item>@string/title_top</item>
-        <item>@string/title_take_photo</item>
         <item>@string/title_pick_image</item>
         <item>@string/title_stop_watch</item>
         <item>@string/title_robotium_punchball</item>
