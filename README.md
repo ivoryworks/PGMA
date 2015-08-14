@@ -3,8 +3,10 @@ Proving Grounds of the Mad Android
 Min version:16(Jelly Bean)  
 Target version:22(Lollipop)
 
-1. Take photo
 1. Pick image
+  - カメラアプリ連携
+  - ギャラリー連携
+  - 画像の共有
 1. Stopwatch
 1. Robotium punchball
 1. Image rotate(octocat 8)
