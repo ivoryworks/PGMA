@@ -1,7 +1,6 @@
 package com.ivoryworks.pgma;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,8 +17,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class FABFragment extends Fragment implements View.OnClickListener {
 
@@ -30,13 +27,6 @@ public class FABFragment extends Fragment implements View.OnClickListener {
     private PreferencesManager mPreferencesManager;
     private ImageView mPreviewPhoto;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment TakePhotoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FABFragment newInstance() {
         FABFragment fragment = new FABFragment();
         return fragment;
@@ -75,36 +65,22 @@ public class FABFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
         case R.id.btnFab:
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            Intent intent;
             if (Build.VERSION.SDK_INT < Constants.KITKAT_API_LV) {
                 intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
             } else {
                 intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/jpeg");
             }
+            intent.setType("image/*");
 
+            File pathExternalPublicDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
             String filename = System.currentTimeMillis() + ".jpg";
-            ContentValues values = new ContentValues();
-            values.put(MediaStore.Images.Media.TITLE, filename);
-            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-            mPhotoUri = getActivity().getContentResolver()
-                    .insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
+            File capturedFile = new File(pathExternalPublicDir, filename);
+            mPhotoUri = Uri.fromFile(capturedFile);
             Intent camIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             camIntent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoUri);
 
@@ -138,22 +114,8 @@ public class FABFragment extends Fragment implements View.OnClickListener {
                 Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
                 int orientation = Utils.getOrientationType(imagePath);
                 mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
-            } else {
-                if (mPhotoUri != null) {
-                    getActivity().getContentResolver().delete(mPhotoUri, null, null);
-                    mPhotoUri = null;
-                }
             }
             break;
         }
-    }
-
-    private Uri createPhotoUri() {
-        // DCIM directory
-        File dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-
-        String timeStamp = new SimpleDateFormat("yyyy_MM_dd__HH_mm_ss").format(new Date());
-        File mediaFile = new File(dcim.getPath() + File.separator + timeStamp + ".jpg");
-        return Uri.fromFile(mediaFile);
     }
 }
