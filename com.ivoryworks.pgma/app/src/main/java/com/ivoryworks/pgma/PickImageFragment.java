@@ -7,10 +7,11 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,23 +19,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class PickImageFragment extends Fragment implements View.OnClickListener {
+public class PickImageFragment extends Fragment {
 
     public static String TAG = PickImageFragment.class.getSimpleName();
     private final int REQ_CODE_ACTION_OPEN_DOCUMENT = 1;
+    private final int REQ_CODE_ACTION_IMAGE_CAPTURE = 2;
     private final String PREF_NAME_IMAGE_PATH = TAG + "_ImagePath";
+    private Uri mPhotoUri;
     private PreferencesManager mPreferencesManager;
     private ImageView mPreviewPhoto;
     private Toast mToast;
+    private MenuItem mMenuShare;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment TakePhotoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static PickImageFragment newInstance() {
         PickImageFragment fragment = new PickImageFragment();
         return fragment;
@@ -48,36 +47,8 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         mPreferencesManager = PreferencesManager.newInstance(getActivity());
         mPreferencesManager.remove(PREF_NAME_IMAGE_PATH);
+        mToast = new Toast(getActivity());
         setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        getActivity().getMenuInflater().inflate(R.menu.share_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        boolean ret = true;
-
-        switch (item.getItemId()){
-        case R.id.menu_item_share:
-            String imgPath = mPreferencesManager.getString(PREF_NAME_IMAGE_PATH);
-            if (imgPath == null || imgPath.isEmpty()) {
-                Utils.showToast(getActivity(), mToast, R.string.msg_share_file_not_fond, Toast.LENGTH_SHORT);
-                break;
-            }
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("image/jpeg");
-            share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + imgPath));
-            startActivity(Intent.createChooser(share, "Share Image"));
-            break;
-        default:
-            ret = super.onOptionsItemSelected(item);
-            break;
-        }
-        return ret;
     }
 
     @Override
@@ -86,7 +57,6 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View layoutView = inflater.inflate(R.layout.fragment_pick_image, container, false);
 
-        layoutView.findViewById(R.id.btnGallery).setOnClickListener(this);
         mPreviewPhoto = (ImageView) layoutView.findViewById(R.id.previewPhoto);
 
         Intent intent = getActivity().getIntent();
@@ -106,38 +76,65 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
                 }
             }
         }
-        return layoutView;
-    }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
+        Toolbar toolbar = (Toolbar) layoutView.findViewById(R.id.tool_bar);
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-        case R.id.btnGallery:
-            Intent intent;
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-                // for Oldies
-                intent = new Intent(Intent.ACTION_GET_CONTENT);
-            } else {
-                // for KitKat
-                intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        MenuItem menuShare = toolbar.getMenu().add("share");
+        menuShare.setIcon(R.drawable.ic_share_white_36dp);
+        menuShare.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menuShare.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                String imgPath = mPreferencesManager.getString(PREF_NAME_IMAGE_PATH);
+                if (imgPath == null || imgPath.isEmpty()) {
+                    Utils.showToast(getActivity(), mToast, R.string.msg_share_file_not_fond, Toast.LENGTH_SHORT);
+                } else {
+                    Intent share = new Intent(Intent.ACTION_SEND);
+                    share.setType("image/jpeg");
+                    share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + imgPath));
+                    startActivity(Intent.createChooser(share, "Share Image"));
+                }
+                return false;
             }
-            intent.addCategory(Intent.CATEGORY_DEFAULT);
-            intent.setType("image/*");
-            startActivityForResult(intent, REQ_CODE_ACTION_OPEN_DOCUMENT);
-            break;
-        default:
-            break;
-        }
+        });
+
+        MenuItem menuCamera = toolbar.getMenu().add("camera");
+        menuCamera.setIcon(R.drawable.ic_photo_camera_white_36dp);
+        menuCamera.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menuCamera.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                mPhotoUri = createPhotoUri();
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoUri);
+                startActivityForResult(intent, REQ_CODE_ACTION_IMAGE_CAPTURE);
+                return false;
+            }
+        });
+
+        MenuItem menuGallery = toolbar.getMenu().add("gallery");
+        menuGallery.setIcon(R.drawable.ic_photo_library_white_36dp);
+        menuGallery.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menuGallery.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                    // for Oldies
+                    intent = new Intent(Intent.ACTION_GET_CONTENT);
+                } else {
+                    // for KitKat
+                    intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                }
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
+                intent.setType("image/*");
+                startActivityForResult(intent, REQ_CODE_ACTION_OPEN_DOCUMENT);
+                return false;
+            }
+        });
+
+        return layoutView;
     }
 
     @Override
@@ -146,6 +143,11 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         case REQ_CODE_ACTION_OPEN_DOCUMENT:
             if (resultCode == Activity.RESULT_OK) {
                 setImage(data.getData());
+            }
+            break;
+        case REQ_CODE_ACTION_IMAGE_CAPTURE:
+            if (resultCode == Activity.RESULT_OK) {
+                setImage(mPhotoUri);
             }
             break;
         }
@@ -160,5 +162,14 @@ public class PickImageFragment extends Fragment implements View.OnClickListener 
         Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
         int orientation = Utils.getOrientationType(imagePath);
         mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
+    }
+
+    private Uri createPhotoUri() {
+        // DCIM directory
+        File dcim = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+
+        String timeStamp = new SimpleDateFormat("yyyy_MM_dd__HH_mm_ss").format(new Date());
+        File mediaFile = new File(dcim.getPath() + File.separator + timeStamp + ".jpg");
+        return Uri.fromFile(mediaFile);
     }
 }
