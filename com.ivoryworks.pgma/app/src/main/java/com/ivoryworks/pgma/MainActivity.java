@@ -67,6 +67,10 @@ public class MainActivity extends ActionBarActivity
             tag = PickImageFragment.TAG;
             fragment = PickImageFragment.newInstance();
             break;
+        case R.string.title_pick_image2:
+            tag = PickImage2Fragment.TAG;
+            fragment = PickImage2Fragment.newInstance();
+            break;
         case R.string.title_stop_watch:
             tag = StopwatchFragment.TAG;
             fragment = StopwatchFragment.newInstance();
@@ -106,10 +110,6 @@ public class MainActivity extends ActionBarActivity
         case R.string.title_media_effects:
             tag = MediaEffectsFragment.TAG;
             fragment = MediaEffectsFragment.newInstance();
-            break;
-        case R.string.title_fab:
-            tag = FABFragment.TAG;
-            fragment = FABFragment.newInstance();
             break;
         case R.string.title_gallery:
             tag = GalleryFragment.TAG;

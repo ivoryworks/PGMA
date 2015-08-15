@@ -9,6 +9,7 @@
 
     <string name="title_top">Top</string>
     <string name="title_pick_image">Pick image</string>
+    <string name="title_pick_image2">Pick image2(chooser mix)</string>
     <string name="title_stop_watch">Stopwatch</string>
     <string name="title_robotium_punchball">RobotiumPunchball(forTest)</string>
     <string name="title_image_rotate">Image rotate</string>
@@ -19,7 +20,6 @@
     <string name="title_gesture">Gesture</string>
     <string name="title_fw_drawable">FW Drawable</string>
     <string name="title_media_effects">Media Effects</string>
-    <string name="title_fab">Floating Action Button</string>
     <string name="title_gallery">Gallery</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

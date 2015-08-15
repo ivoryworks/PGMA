@@ -18,21 +18,21 @@ import android.widget.ImageView;
 
 import java.io.File;
 
-public class FABFragment extends Fragment implements View.OnClickListener {
+public class PickImage2Fragment extends Fragment implements View.OnClickListener {
 
-    public static String TAG = FABFragment.class.getSimpleName();
+    public static String TAG = PickImage2Fragment.class.getSimpleName();
     private final int REQ_CODE_ACTION_IMAGE_CAPTURE = 1;
     private final String PREF_NAME_IMAGE_PATH = TAG + "_ImagePath";
     private Uri mPhotoUri;
     private PreferencesManager mPreferencesManager;
     private ImageView mPreviewPhoto;
 
-    public static FABFragment newInstance() {
-        FABFragment fragment = new FABFragment();
+    public static PickImage2Fragment newInstance() {
+        PickImage2Fragment fragment = new PickImage2Fragment();
         return fragment;
     }
 
-    public FABFragment() {
+    public PickImage2Fragment() {
     }
 
     @Override
@@ -46,7 +46,7 @@ public class FABFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View layoutView = inflater.inflate(R.layout.fragment_fab, container, false);
+        View layoutView = inflater.inflate(R.layout.fragment_pick_image2, container, false);
 
         layoutView.findViewById(R.id.btnFab).setOnClickListener(this);
         mPreviewPhoto = (ImageView) layoutView.findViewById(R.id.previewPhoto);

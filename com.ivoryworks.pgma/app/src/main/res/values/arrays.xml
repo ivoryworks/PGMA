@@ -3,6 +3,7 @@
     <string-array name="navigation_drawer_title">
         <item>@string/title_top</item>
         <item>@string/title_pick_image</item>
+        <item>@string/title_pick_image2</item>
         <item>@string/title_stop_watch</item>
         <item>@string/title_robotium_punchball</item>
         <item>@string/title_image_rotate</item>
@@ -13,7 +14,6 @@
         <item>@string/title_gesture</item>
         <item>@string/title_fw_drawable</item>
         <item>@string/title_media_effects</item>
-        <item>@string/title_fab</item>
         <item>@string/title_gallery</item>
     </string-array>
 </resources>

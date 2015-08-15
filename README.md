@@ -4,9 +4,12 @@ Min version:16(Jelly Bean)
 Target version:22(Lollipop)
 
 1. Pick image
-  - ƒJƒƒ‰ƒAƒvƒŠ˜AŒg
-  - ƒMƒƒƒ‰ƒŠ[˜AŒg
-  - ‰æ‘œ‚Ì‹¤—L
+  - ã‚«ãƒ¡ãƒ©é€£æº
+  - ã‚®ãƒ£ãƒ©ãƒªãƒ¼é€£æº
+  - ç”»åƒã®å…±æœ‰
+1. Pick image2(chooser mix)
+  - Floating Action Button(FAB)
+  - ã‚«ãƒ¡ãƒ©é€£æºã¨ã‚®ãƒ£ãƒ©ãƒªãƒ¼é€£æºã®Intentã‚’1ã¤ã«
 1. Stopwatch
 1. Robotium punchball
 1. Image rotate(octocat 8)
@@ -17,5 +20,4 @@ Target version:22(Lollipop)
 1. Gesture
 1. FW Drawable
 1. Media Effects
-1. Floating Action Button
 1. Gallery
