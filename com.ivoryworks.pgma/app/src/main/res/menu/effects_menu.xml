@@ -4,6 +4,9 @@
         android:id="@+id/menu_item_autofix"
         android:title="@string/menu_item_effects_autofix" />
     <item
+        android:id="@+id/menu_item_blackwhite"
+        android:title="@string/menu_item_effects_blackwhite" />
+    <item
         android:id="@+id/menu_item_lomoish"
         android:title="@string/menu_item_effects_lomoish" />
     <item

@@ -26,6 +26,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="menu_item_effects_autofix">EFFECT_AUTOFIX</string>
+    <string name="menu_item_effects_blackwhite">EFFECT_BLACKWHITE</string>
     <string name="menu_item_effects_lomoish">EFFECT_LOMOISH</string>
     <string name="menu_item_effects_negative">EFFECT_NEGATIVE</string>
 
