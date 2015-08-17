@@ -15,4 +15,10 @@
     <item
         android:id="@+id/menu_item_rotate90"
         android:title="@string/menu_item_effects_rotate90" />
+    <item
+        android:id="@+id/menu_item_rotate180"
+        android:title="@string/menu_item_effects_rotate180" />
+    <item
+        android:id="@+id/menu_item_rotate270"
+        android:title="@string/menu_item_effects_rotate270" />
 </menu>

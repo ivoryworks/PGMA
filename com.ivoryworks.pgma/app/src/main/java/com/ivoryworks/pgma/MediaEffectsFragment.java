@@ -172,13 +172,21 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_ROTATE);
                 mEffect.setParameter("angle", 90);
                 break;
+            case R.id.menu_item_rotate180:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_ROTATE);
+                mEffect.setParameter("angle", 180);
+                break;
+            case R.id.menu_item_rotate270:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_ROTATE);
+                mEffect.setParameter("angle", 270);
+                break;
             default:
                 break;
         }
     }
 
     private void applyEffect() {
-        if (mCurrentEffect == R.id.menu_item_rotate90) {
+        if (mCurrentEffect == R.id.menu_item_rotate90 || mCurrentEffect == R.id.menu_item_rotate270) {
             mTexRenderer.updateTextureSize(mImageHeight, mImageWidth);
             mEffect.apply(mTextures[0], mImageHeight, mImageWidth, mTextures[1]);
         } else {

@@ -30,6 +30,8 @@
     <string name="menu_item_effects_lomoish">EFFECT_LOMOISH</string>
     <string name="menu_item_effects_negative">EFFECT_NEGATIVE</string>
     <string name="menu_item_effects_rotate90">EFFECT_ROTATE 90</string>
+    <string name="menu_item_effects_rotate180">EFFECT_ROTATE 180</string>
+    <string name="menu_item_effects_rotate270">EFFECT_ROTATE 270</string>
 
     <string name="action_example">Example action</string>
 
