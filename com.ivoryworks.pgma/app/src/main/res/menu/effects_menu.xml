@@ -12,4 +12,7 @@
     <item
         android:id="@+id/menu_item_negative"
         android:title="@string/menu_item_effects_negative" />
+    <item
+        android:id="@+id/menu_item_rotate90"
+        android:title="@string/menu_item_effects_rotate90" />
 </menu>
