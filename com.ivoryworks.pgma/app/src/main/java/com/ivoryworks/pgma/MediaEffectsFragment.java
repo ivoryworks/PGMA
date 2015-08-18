@@ -162,6 +162,10 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
                 mEffect.setParameter("black", .1f);
                 mEffect.setParameter("white", .7f);
                 break;
+            case R.id.menu_item_brightness:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_BRIGHTNESS);
+                mEffect.setParameter("brightness", 2.0f);
+                break;
             case R.id.menu_item_lomoish:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_LOMOISH);
                 break;

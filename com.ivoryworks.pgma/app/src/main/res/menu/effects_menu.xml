@@ -7,6 +7,9 @@
         android:id="@+id/menu_item_blackwhite"
         android:title="@string/menu_item_effects_blackwhite" />
     <item
+        android:id="@+id/menu_item_brightness"
+        android:title="@string/menu_item_effects_brightness" />
+    <item
         android:id="@+id/menu_item_lomoish"
         android:title="@string/menu_item_effects_lomoish" />
     <item
