@@ -170,6 +170,9 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_CONTRAST);
                 mEffect.setParameter("contrast", 1.4f);
                 break;
+            case R.id.menu_item_crossprocess:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_CROSSPROCESS);
+                break;
             case R.id.menu_item_lomoish:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_LOMOISH);
                 break;
