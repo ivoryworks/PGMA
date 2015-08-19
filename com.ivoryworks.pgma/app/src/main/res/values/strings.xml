@@ -30,6 +30,7 @@
     <string name="menu_item_effects_brightness">EFFECT_BRIGHTNESS</string>
     <string name="menu_item_effects_contrast">EFFECT_CONTRAST</string>
     <string name="menu_item_effects_crossprocess">EFFECT_CROSSPROCESS</string>
+    <string name="menu_item_effects_documentary">EFFECT_DOCUMENTARY</string>
     <string name="menu_item_effects_lomoish">EFFECT_LOMOISH</string>
     <string name="menu_item_effects_negative">EFFECT_NEGATIVE</string>
     <string name="menu_item_effects_rotate90">EFFECT_ROTATE 90</string>

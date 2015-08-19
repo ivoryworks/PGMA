@@ -173,6 +173,9 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
             case R.id.menu_item_crossprocess:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_CROSSPROCESS);
                 break;
+            case R.id.menu_item_documentary:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_DOCUMENTARY);
+                break;
             case R.id.menu_item_lomoish:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_LOMOISH);
                 break;

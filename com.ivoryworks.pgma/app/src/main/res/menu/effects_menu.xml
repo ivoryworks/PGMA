@@ -16,6 +16,9 @@
         android:id="@+id/menu_item_crossprocess"
         android:title="@string/menu_item_effects_crossprocess" />
     <item
+        android:id="@+id/menu_item_documentary"
+        android:title="@string/menu_item_effects_documentary" />
+    <item
         android:id="@+id/menu_item_lomoish"
         android:title="@string/menu_item_effects_lomoish" />
     <item
