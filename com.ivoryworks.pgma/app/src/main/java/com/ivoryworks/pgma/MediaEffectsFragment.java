@@ -3,6 +3,7 @@ package com.ivoryworks.pgma;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.effect.Effect;
 import android.media.effect.EffectContext;
 import android.media.effect.EffectFactory;
@@ -175,6 +176,11 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
                 break;
             case R.id.menu_item_documentary:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_DOCUMENTARY);
+                break;
+            case R.id.menu_item_duotone:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_DUOTONE);
+                mEffect.setParameter("first_color", Color.YELLOW);
+                mEffect.setParameter("second_color", Color.DKGRAY);
                 break;
             case R.id.menu_item_lomoish:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_LOMOISH);
