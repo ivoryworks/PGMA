@@ -22,6 +22,9 @@
         android:id="@+id/menu_item_duotone"
         android:title="@string/menu_item_effects_duotone" />
     <item
+        android:id="@+id/menu_item_filllight"
+        android:title="@string/menu_item_effects_filllight" />
+    <item
         android:id="@+id/menu_item_lomoish"
         android:title="@string/menu_item_effects_lomoish" />
     <item

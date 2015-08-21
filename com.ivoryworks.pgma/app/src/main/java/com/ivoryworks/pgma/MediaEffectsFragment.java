@@ -182,6 +182,10 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
                 mEffect.setParameter("first_color", Color.YELLOW);
                 mEffect.setParameter("second_color", Color.DKGRAY);
                 break;
+            case R.id.menu_item_filllight:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_FILLLIGHT);
+                mEffect.setParameter("strength", .8f);
+                break;
             case R.id.menu_item_lomoish:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_LOMOISH);
                 break;
