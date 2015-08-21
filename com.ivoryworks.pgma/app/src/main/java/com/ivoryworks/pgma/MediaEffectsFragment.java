@@ -186,6 +186,10 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_FILLLIGHT);
                 mEffect.setParameter("strength", .8f);
                 break;
+            case R.id.menu_item_fisheye:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_FISHEYE);
+                mEffect.setParameter("scale", .5f);
+                break;
             case R.id.menu_item_lomoish:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_LOMOISH);
                 break;
