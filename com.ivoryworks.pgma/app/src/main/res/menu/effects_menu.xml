@@ -28,6 +28,12 @@
         android:id="@+id/menu_item_fisheye"
         android:title="@string/menu_item_effects_fisheye" />
     <item
+        android:id="@+id/menu_item_flip_vertical"
+        android:title="@string/menu_item_effects_flip_vertical" />
+    <item
+        android:id="@+id/menu_item_flip_horizontal"
+        android:title="@string/menu_item_effects_flip_horizontal" />
+    <item
         android:id="@+id/menu_item_lomoish"
         android:title="@string/menu_item_effects_lomoish" />
     <item
