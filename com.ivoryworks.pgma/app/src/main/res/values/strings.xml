@@ -36,6 +36,8 @@
     <string name="menu_item_effects_fisheye">EFFECT_FISHEYE</string>
     <string name="menu_item_effects_flip_vertical">EFFECT_FLIP(vertical)</string>
     <string name="menu_item_effects_flip_horizontal">EFFECT_FLIP(horizontal)</string>
+    <string name="menu_item_effects_grain_1_0">EFFECT_GRAIN(1.0)</string>
+    <string name="menu_item_effects_grain_2_0">EFFECT_GRAIN(2.0)</string>
     <string name="menu_item_effects_lomoish">EFFECT_LOMOISH</string>
     <string name="menu_item_effects_negative">EFFECT_NEGATIVE</string>
     <string name="menu_item_effects_rotate90">EFFECT_ROTATE 90</string>

@@ -198,6 +198,14 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_FLIP);
                 mEffect.setParameter("horizontal", true);
                 break;
+            case R.id.menu_item_grain_1_0:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_GRAIN);
+                mEffect.setParameter("strength", 1.0f);
+                break;
+            case R.id.menu_item_grain_2_0:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_GRAIN);
+                mEffect.setParameter("strength", 2.0f);
+                break;
             case R.id.menu_item_lomoish:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_LOMOISH);
                 break;

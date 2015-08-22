@@ -34,6 +34,12 @@
         android:id="@+id/menu_item_flip_horizontal"
         android:title="@string/menu_item_effects_flip_horizontal" />
     <item
+        android:id="@+id/menu_item_grain_1_0"
+        android:title="@string/menu_item_effects_grain_1_0" />
+    <item
+        android:id="@+id/menu_item_grain_2_0"
+        android:title="@string/menu_item_effects_grain_2_0" />
+    <item
         android:id="@+id/menu_item_lomoish"
         android:title="@string/menu_item_effects_lomoish" />
     <item
