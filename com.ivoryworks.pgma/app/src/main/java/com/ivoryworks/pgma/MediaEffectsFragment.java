@@ -215,6 +215,9 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
             case R.id.menu_item_negative:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_NEGATIVE);
                 break;
+            case R.id.menu_item_posterize:
+                mEffect = effectFactory.createEffect(EffectFactory.EFFECT_POSTERIZE);
+                break;
             case R.id.menu_item_rotate90:
                 mEffect = effectFactory.createEffect(EffectFactory.EFFECT_ROTATE);
                 mEffect.setParameter("angle", 90);
