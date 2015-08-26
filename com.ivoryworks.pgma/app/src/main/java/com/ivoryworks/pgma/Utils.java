@@ -3,6 +3,7 @@ package com.ivoryworks.pgma;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -213,5 +214,27 @@ public class Utils {
         toast = Toast.makeText(context, messageId, lengthType);
         toast.show();
         return toast;
+    }
+
+    public static Intent createGalleryPickIntent() {
+        Intent intent;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            // Oldies
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+        } else {
+            // Newer( >= KitKat)
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+        }
+        intent.setType("image/*");
+        return intent;
+    }
+
+    public static Intent createImageCaptureIntent(Uri outUri) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, outUri);
+        return intent;
     }
 }

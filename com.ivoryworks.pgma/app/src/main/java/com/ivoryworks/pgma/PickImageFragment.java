@@ -105,9 +105,7 @@ public class PickImageFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 mPhotoUri = createPhotoUri();
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.addCategory(Intent.CATEGORY_DEFAULT);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoUri);
+                Intent intent = Utils.createImageCaptureIntent(mPhotoUri);
                 startActivityForResult(intent, REQ_CODE_ACTION_IMAGE_CAPTURE);
                 return false;
             }
@@ -119,16 +117,7 @@ public class PickImageFragment extends Fragment {
         menuGallery.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent intent;
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-                    // for Oldies
-                    intent = new Intent(Intent.ACTION_GET_CONTENT);
-                } else {
-                    // for KitKat
-                    intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                }
-                intent.addCategory(Intent.CATEGORY_DEFAULT);
-                intent.setType("image/*");
+                Intent intent = Utils.createGalleryPickIntent();
                 startActivityForResult(intent, REQ_CODE_ACTION_OPEN_DOCUMENT);
                 return false;
             }

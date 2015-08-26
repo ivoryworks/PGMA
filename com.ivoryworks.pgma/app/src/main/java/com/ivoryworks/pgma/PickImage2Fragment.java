@@ -68,21 +68,13 @@ public class PickImage2Fragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
         case R.id.btnFab:
-            Intent intent;
-            if (Build.VERSION.SDK_INT < Constants.KITKAT_API_LV) {
-                intent = new Intent(Intent.ACTION_GET_CONTENT);
-            } else {
-                intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-            }
-            intent.setType("image/*");
+            Intent intent = Utils.createGalleryPickIntent();  // to Gallery
 
             File pathExternalPublicDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
             String filename = System.currentTimeMillis() + ".jpg";
             File capturedFile = new File(pathExternalPublicDir, filename);
             mPhotoUri = Uri.fromFile(capturedFile);
-            Intent camIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            camIntent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoUri);
+            Intent camIntent = Utils.createImageCaptureIntent(mPhotoUri);
 
             Intent chooserIntent = Intent.createChooser(intent, "Pick Image");
             chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{camIntent});
