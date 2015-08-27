@@ -1,6 +1,6 @@
 #PGMA
 Proving Grounds of the Mad Android  
-Min version:18(Jelly Bean)  
+Min version:16(Jelly Bean)  
 Target version:22(Lollipop)
 
 1. Pick image
