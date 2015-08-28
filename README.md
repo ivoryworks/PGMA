@@ -11,7 +11,6 @@ Target version:22(Lollipop)
   - Floating Action Button(FAB)
   - カメラ連携とギャラリー連携のIntentを1つに
 1. Stopwatch
-1. Robotium punchball
 1. Image rotate(octocat 8)
 1. Progress variation
 1. Image crop
