@@ -3,9 +3,11 @@ package com.ivoryworks.pgma;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
@@ -14,11 +16,16 @@ public class PickImageFragmentTest {
     private UiDevice mDevice;
 
     @Before
-    public void startPickImageFragmentTest() {
+    public void setup() {
         // Initialize
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        Tools.goToHome(mDevice);
+        Tools.startPGMA(mDevice);
+    }
 
-        // Start home screen
-        mDevice.pressHome();
+    @Test
+    public void testShareFail() {
+        mDevice.swipe(48, 100, 100, 100, 10);
+        mDevice.findObject(By.text("Top")).click();
     }
 }
