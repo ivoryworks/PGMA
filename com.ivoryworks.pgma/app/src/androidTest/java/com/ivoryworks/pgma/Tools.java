@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class Tools {
     public static final int LAUNCH_TIMEOUT = 5000;
-    public static final String PGMA_PACKAGE = "com.ivoryworks.PGMA";
+    public static final String PGMA_PACKAGE = "com.ivoryworks.pgma";
 
     public static void startPGMA(UiDevice device) {
         Context context = InstrumentationRegistry.getContext();

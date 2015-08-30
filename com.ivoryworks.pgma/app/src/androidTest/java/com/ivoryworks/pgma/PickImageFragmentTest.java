@@ -2,6 +2,7 @@ package com.ivoryworks.pgma;
 
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
+import android.support.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
@@ -25,7 +26,7 @@ public class PickImageFragmentTest {
 
     @Test
     public void testShareFail() {
-        mDevice.swipe(48, 100, 100, 100, 10);
-        mDevice.findObject(By.text("Top")).click();
+        // open Navigation drawer
+        mDevice.findObject(By.desc("Navigate up")).click();
     }
 }
