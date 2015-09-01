@@ -1,4 +1,11 @@
 # uiautomator memo
+## CheckBoxの状態を知る
+
+    UiSelector chkBox = new UiSelector().className(CheckedBox.class.getName()).instance(0);
+    if (mDevice.findObject(chkBox).isChecked()) {
+        ...
+    }
+
 ## minSDKbバージョンが17以下のプロジェクトでuiautomatorを使いたい
 テスト向けのAndroidManifest.xmlを、テストディレクトリ配下に置く。
 
