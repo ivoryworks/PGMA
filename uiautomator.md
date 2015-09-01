@@ -1,13 +1,19 @@
 # uiautomator memo
-## CheckBox‚Ìó‘Ô‚ğ’m‚é
+## ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ã¦æ¢ã™
+    UiScrollable scroller = new UiScrollable(new UiSelector().className(ListView.class.getName()));
+    scroller.setAsVerticalList();   // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«æ–¹å‘æŒ‡å®š
+    UiObject target = scroller.getChildByText(new UiSelector().className(TextView.class.getName()), æ¢ç´¢æ–‡å­—åˆ—);
+    mDevice.findObject(target).click();
+
+## CheckBoxã®çŠ¶æ…‹ã‚’çŸ¥ã‚‹
 
     UiSelector chkBox = new UiSelector().className(CheckedBox.class.getName()).instance(0);
     if (mDevice.findObject(chkBox).isChecked()) {
         ...
     }
 
-## minSDKbƒo[ƒWƒ‡ƒ“‚ª17ˆÈ‰º‚ÌƒvƒƒWƒFƒNƒg‚Åuiautomator‚ğg‚¢‚½‚¢
-ƒeƒXƒgŒü‚¯‚ÌAndroidManifest.xml‚ğAƒeƒXƒgƒfƒBƒŒƒNƒgƒŠ”z‰º‚É’u‚­B
+## minSDKbãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒ17ä»¥ä¸‹ã®ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã§uiautomatorã‚’ä½¿ã„ãŸã„
+ãƒ†ã‚¹ãƒˆå‘ã‘ã®AndroidManifest.xmlã‚’ã€ãƒ†ã‚¹ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªé…ä¸‹ã«ç½®ãã€‚
 
     <?xml version="1.0" encoding="utf-8"?>
     <manifest
