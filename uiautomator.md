@@ -1,4 +1,11 @@
 # uiautomator memo
+## ナンバーピッカーまわす
+変数stepにより上に回すか下に回すかコントロールする。
+
+    UiObject picker = mDevice.findObject(new UiSelector().className(NumberPicker.class.getName()));
+    mDevice.swipe(picker.getBounds().centerX(), picker.getBounds().centerY(),
+            picker.getBounds().centerX(), picker.getBounds().centerY() + step, 30);
+
 ## 複雑なスワイプ
 複数の頂点を与えると順に辿る。
 
@@ -6,7 +13,7 @@
     segments[0] = new Point(120, 425);
     segments[1] = new Point(120, 910);
     segments[2] = new Point(600, 910);
-    mDevice.swipe(segments, SWIPE_STEPS);
+    mDevice.swipe(segments, 30);
 
 ## ロングプレスする
 UiObjectのlongClick()で事足りない時。
@@ -15,7 +22,7 @@ UiObjectのlongClick()で事足りない時。
 
 ## SeekBarを動かす
 マイナス方向へ動かす。  
-現在の位置から増減させる操作はできなさそう。
+現在の位置から増減させる操作は難しそう。
 
     UiSelector seekBar = new UiSelector().className(SeekBar.class.getName());
     int startX = mDevice.findObject(seekBar).getBounds().centerX();
@@ -54,13 +61,23 @@ android.util.AndroidException: INSTRUMENTATION_FAILED:となる場合、以下�
 
     $ adb shell pm list instrumentation
 
-## minSDKbバージョンが17以下のプロジェクトでuiautomatorを使いたい
+## minSDKbバージョンが17以下のプロジェクトでuiautomatorを使う
 テスト向けのAndroidManifest.xmlを、テストディレクトリ配下に置く。
 
     <?xml version="1.0" encoding="utf-8"?>
     <manifest
         xmlns:tools="http://schemas.android.com/tools"
-        package="com.ivoryworks.pgma.test">
+        package="com.example.android.test">
 
         <uses-sdk tools:overrideLibrary="android.support.test.uiautomator.v18"/>
     </manifest>
+
+## 主要クラス
+### UiDevice
+　テストを実行するデバイスそのもの。「ホーム」や「バック」キーの押下や、端末の向きを変更するメソッドが用意されている。
+
+### UiSelector
+　操作する対象のUIコンポーネントを特定するための走査条件を表す。
+
+### UiObject
+　操作するUIコンポーネントそのもの。
