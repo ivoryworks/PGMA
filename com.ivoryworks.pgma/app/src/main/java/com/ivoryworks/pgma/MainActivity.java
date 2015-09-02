@@ -121,7 +121,7 @@ public class MainActivity extends ActionBarActivity
             fragment.setRetainInstance(true);
             FragmentTransaction transaction = mFragmentManager.beginTransaction();
             transaction.replace(R.id.container, fragment, tag);
-            transaction.addToBackStack(null);
+//            transaction.addToBackStack(null);
             transaction.commit();
             restoreActionBar();
         }
