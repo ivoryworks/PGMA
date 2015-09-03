@@ -1,4 +1,28 @@
 # uiautomator memo
+## 画面キャプチャ
+
+    String fileName = "UiAutomator_" + System.currentTimeMillis() + ".png";
+     File filePath = new File("/mnt/sdcard/Pictures/" + fileName);
+     mDevice.takeScreenshot(filePath);
+
+## ViewPagerをフリックする
+
+    int displayWidth = mDevice.getDisplayWidth();
+    int displayHeight = mDevice.getDisplayHeight();
+    // Left to Right
+    mDevice.swipe((int)(displayWidth * .25), displayHeight / 2,
+                        displayWidth, displayHeight / 2, SWIPE_STEPS);
+    // Right to Left
+    mDevice.swipe((int)(displayWidth * .75), displayHeight / 2,
+                        0, displayHeight / 2, SWIPE_STEPS);
+
+
+## 端末の向きを変える
+
+    mDevice.setOrientationRight();
+    mDevice.setOrientationLeft();
+    mDevice.setOrientationNatural();    // 自然な状態へ
+
 ## ナンバーピッカーまわす
 変数stepにより上に回すか下に回すかコントロールする。
 
