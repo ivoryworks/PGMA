@@ -1,5 +1,6 @@
 package com.ivoryworks.pgma;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,9 +8,11 @@ import android.graphics.Color;
 import android.media.effect.Effect;
 import android.media.effect.EffectContext;
 import android.media.effect.EffectFactory;
+import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +24,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -84,6 +88,19 @@ public class MediaEffectsFragment extends Fragment implements GLSurfaceView.Rend
         } else {
             mCurrentEffect = R.id.none;
         }
+
+        // add tool menu
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
+        MenuItem menuShare = toolbar.getMenu().add("share");
+        menuShare.setIcon(R.drawable.ic_save_white_36dp);
+        menuShare.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menuShare.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
+
         return view;
     }
 
