@@ -61,9 +61,7 @@ UiObjectのlongClick()で事足りない時。
 
 ## 5秒待つ
 
-    mDevice.waitForIdle(5000);
-
-※これ待てない（未解決）
+    SystemClock.sleep(5000);
 
 ## スクロールして探す
     UiScrollable scroller = new UiScrollable(new UiSelector().className(ListView.class.getName()));
