@@ -12,6 +12,7 @@ Target version:22(Lollipop)
   - カメラ連携とギャラリー連携のIntentを1つに
 1. Stopwatch
 1. Image rotate(octocat 8)
+  - マトリクスによる画像の回転
 1. Progress variation
 1. Image crop
 1. Image mix
