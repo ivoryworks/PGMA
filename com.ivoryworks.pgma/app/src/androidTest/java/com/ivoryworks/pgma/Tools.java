@@ -14,6 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class Tools {
     public static final int LAUNCH_TIMEOUT = 5000;
+    public static final int SWIPE_STEP = 30;
     public static final String PGMA_PACKAGE = "com.ivoryworks.pgma";
 
     public static void startPGMA(UiDevice device) {
@@ -31,6 +32,18 @@ public class Tools {
         final String launcherPackage = Tools.getLauncherPackageName();
         assertThat(launcherPackage, notNullValue());
         device.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), Tools.LAUNCH_TIMEOUT);
+    }
+
+    public static void openNavigationDrawer(UiDevice device) {
+        int width = device.getDisplayWidth();
+        int height = device.getDisplayHeight();
+        device.swipe(0, height / 2, (int) (width * .75), height / 2, SWIPE_STEP);
+    }
+
+    public static void closeNavigationDrawer(UiDevice device) {
+        int width = device.getDisplayWidth();
+        int height = device.getDisplayHeight();
+        device.swipe((int)(width * .75), height / 2, 0, height / 2, SWIPE_STEP);
     }
 
     public static String getLauncherPackageName() {
