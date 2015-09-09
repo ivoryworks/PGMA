@@ -2,6 +2,7 @@ package com.ivoryworks.pgma;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -33,6 +34,7 @@ public class PickImageFragment extends Fragment {
     private ImageView mPreviewPhoto;
     private Toast mToast;
     private MenuItem mMenuShare;
+    private View mParentView;
 
     public static PickImageFragment newInstance() {
         PickImageFragment fragment = new PickImageFragment();
@@ -55,9 +57,9 @@ public class PickImageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View layoutView = inflater.inflate(R.layout.fragment_pick_image, container, false);
+        mParentView = inflater.inflate(R.layout.fragment_pick_image, container, false);
 
-        mPreviewPhoto = (ImageView) layoutView.findViewById(R.id.previewPhoto);
+        mPreviewPhoto = (ImageView) mParentView.findViewById(R.id.previewPhoto);
 
         Intent intent = getActivity().getIntent();
         String action = intent.getAction();
@@ -77,7 +79,7 @@ public class PickImageFragment extends Fragment {
             }
         }
 
-        Toolbar toolbar = (Toolbar) layoutView.findViewById(R.id.tool_bar);
+        Toolbar toolbar = (Toolbar) mParentView.findViewById(R.id.tool_bar);
 
         MenuItem menuShare = toolbar.getMenu().add("share");
         menuShare.setIcon(R.drawable.ic_share_white_36dp);
@@ -87,7 +89,9 @@ public class PickImageFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 String imgPath = mPreferencesManager.getString(PREF_NAME_IMAGE_PATH);
                 if (imgPath == null || imgPath.isEmpty()) {
-                    Utils.showToast(getActivity(), mToast, R.string.msg_share_file_not_fond, Toast.LENGTH_SHORT);
+                    Resources res = getResources();
+                    String message = res.getString(R.string.msg_share_file_not_fond);
+                    Utils.showSnackbar(mParentView, message);
                 } else {
                     Intent share = new Intent(Intent.ACTION_SEND);
                     share.setType("image/jpeg");
@@ -123,7 +127,7 @@ public class PickImageFragment extends Fragment {
             }
         });
 
-        return layoutView;
+        return mParentView;
     }
 
     @Override

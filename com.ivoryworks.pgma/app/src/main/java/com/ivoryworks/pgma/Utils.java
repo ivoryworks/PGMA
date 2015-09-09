@@ -13,7 +13,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -214,6 +216,10 @@ public class Utils {
         toast = Toast.makeText(context, messageId, lengthType);
         toast.show();
         return toast;
+    }
+
+    public static void showSnackbar(View parentView, String text) {
+        Snackbar.make(parentView, text, Snackbar.LENGTH_SHORT).show();
     }
 
     public static Intent createGalleryPickIntent() {
