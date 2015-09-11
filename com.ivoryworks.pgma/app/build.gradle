@@ -9,7 +9,8 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testApplicationId 'com.ivoryworks.pgma.test'
+        testInstrumentationRunner "com.ivoryworks.pgma.CustomTestRunner"
     }
     packagingOptions {
         exclude 'LICENSE.txt'   // 重複コピーのエラー対策

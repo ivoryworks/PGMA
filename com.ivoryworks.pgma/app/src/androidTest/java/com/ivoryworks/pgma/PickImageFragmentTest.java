@@ -15,10 +15,12 @@ import org.junit.runner.RunWith;
 @SdkSuppress(minSdkVersion = 18)
 public class PickImageFragmentTest {
     private UiDevice mDevice;
+    private int mLoopCnt;
 
     @Before
     public void setup() {
         // Initialize
+        mLoopCnt = Integer.valueOf(System.getProperty("loop", "1"));
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         Tools.goToHome(mDevice);
         Tools.startPGMA(mDevice);
