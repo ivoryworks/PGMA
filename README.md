@@ -7,6 +7,7 @@ Target version:22(Lollipop)
   - カメラ連携
   - ギャラリー連携
   - 画像の共有
+  - SnackBar
 1. Pick image2(chooser mix)
   - Floating Action Button(FAB)
   - カメラ連携とギャラリー連携のIntentを1つに
