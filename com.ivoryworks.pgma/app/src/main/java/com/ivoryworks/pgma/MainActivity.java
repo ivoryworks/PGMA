@@ -112,8 +112,8 @@ public class MainActivity extends ActionBarActivity
             fragment = GalleryFragment.newInstance();
             break;
         case R.string.title_fonts:
-            tag = FontFragment.TAG;
-            fragment = FontFragment.newInstance();
+            tag = FontsFragment.TAG;
+            fragment = FontsFragment.newInstance();
             break;
         case R.string.title_top:
         default:

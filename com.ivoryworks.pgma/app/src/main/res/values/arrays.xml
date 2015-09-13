@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="font_names">
+        <item>Roboto-Black</item>
+        <item>Roboto-BlackItalic</item>
+        <item>Roboto-Bold</item>
+        <item>Roboto-BoldItalic</item>
+        <item>Roboto-Italic</item>
+        <item>Roboto-Light</item>
+        <item>Roboto-LightItalic</item>
+        <item>Roboto-Medium</item>
+        <item>Roboto-MediumItalic</item>
+        <item>Roboto-Regular</item>
+        <item>Roboto-Thin</item>
+        <item>Roboto-ThinItalic</item>
+    </string-array>
     <string-array name="navigation_drawer_title">
         <item>@string/title_top</item>
         <item>@string/title_pick_image</item>
