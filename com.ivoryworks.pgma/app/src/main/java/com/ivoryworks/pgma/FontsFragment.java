@@ -42,6 +42,16 @@ public class FontsFragment extends Fragment {
             list.add(font);
         }
 
+        Typeface[] typefaces = {Typeface.DEFAULT, Typeface.DEFAULT_BOLD, Typeface.MONOSPACE, Typeface.SANS_SERIF, Typeface.SERIF};
+        String[] typefaceNames = {"Typeface.DEFAULT", "Typeface.DEFAULT_BOLD", "Typeface.MONOSPACE", "Typeface.SANS_SERIF", "Typeface.SERIF"};
+        int idx = 0;
+        for (Typeface tf : typefaces) {
+            FontItem font = new FontItem();
+            font.setTypeface(tf);
+            font.setSampleText(typefaceNames[idx++]);
+            list.add(font);
+        }
+
         FontsAdapter adapter = new FontsAdapter(getActivity());
         adapter.setFontList(list);
         listView.setAdapter(adapter);
