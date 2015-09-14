@@ -22,3 +22,6 @@ Target version:22(Lollipop)
 1. FW Drawable
 1. Media Effects
 1. Gallery
+1. Fonts
+    - frameworkのTypefaceを使用
+    - assetsに保持したフォントファイルを使用
