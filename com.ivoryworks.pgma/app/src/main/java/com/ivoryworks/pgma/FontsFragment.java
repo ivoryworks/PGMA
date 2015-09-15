@@ -32,6 +32,7 @@ public class FontsFragment extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.listView);
         ArrayList<FontItem> list = new ArrayList<>();
 
+        // assetに持つアプリ独自フォント(Roboto)
         String[] fontNameArray = getActivity().getBaseContext()
                 .getResources().getStringArray(R.array.font_names);
         for (String fontName : fontNameArray) {
@@ -42,14 +43,23 @@ public class FontsFragment extends Fragment {
             list.add(font);
         }
 
-        Typeface[] typefaces = {Typeface.DEFAULT, Typeface.DEFAULT_BOLD, Typeface.MONOSPACE, Typeface.SANS_SERIF, Typeface.SERIF};
-        String[] typefaceNames = {"Typeface.DEFAULT", "Typeface.DEFAULT_BOLD", "Typeface.MONOSPACE", "Typeface.SANS_SERIF", "Typeface.SERIF"};
-        int idx = 0;
-        for (Typeface tf : typefaces) {
-            FontItem font = new FontItem();
-            font.setTypeface(tf);
-            font.setSampleText(typefaceNames[idx++]);
-            list.add(font);
+        // frameworksフォント
+        Typeface[] fontFamilys = {Typeface.DEFAULT, Typeface.DEFAULT_BOLD, Typeface.MONOSPACE,
+                Typeface.SANS_SERIF, Typeface.SERIF};
+        String[] fontFamilyNames = {"DEFAULT", "DEFAULT_BOLD", "MONOSPACE", "SANS_SERIF", "SERIF"};
+        int[] fontStyles = {Typeface.NORMAL, Typeface.BOLD, Typeface.BOLD_ITALIC, Typeface.ITALIC};
+        String[] fontStyleNames = {"NORMAL", "BOLD", "BOLD_ITALIC", "ITALIC"};
+
+        int ffIndex = 0;
+        for (Typeface ff : fontFamilys) {
+            int fsIndex = 0;
+            for (int fs : fontStyles) {
+                FontItem font = new FontItem();
+                font.setTypeface(ff, fs);
+                font.setSampleText(fontFamilyNames[ffIndex] + " + " + fontStyleNames[fsIndex++]);
+                list.add(font);
+            }
+            ffIndex++;
         }
 
         FontsAdapter adapter = new FontsAdapter(getActivity());
@@ -91,16 +101,18 @@ public class FontsFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = mLayoutInflater.inflate(R.layout.listitem_font, parent,false);
             TextView fontName = (TextView)convertView.findViewById(R.id.sample_text);
-            fontName.setTypeface(mFontList.get(position).getTypeface());
+            fontName.setTypeface(mFontList.get(position).getFontFamily(),
+                    mFontList.get(position).getFontStyle());
             fontName.setText(mFontList.get(position).getSampleText());
             return convertView;
         }
     }
 
     private class FontItem {
-        long mId;
-        String mSampleText;
-        Typeface mTypeface;
+        private long mId;
+        private String mSampleText;
+        private Typeface mFontFamily;
+        private int mFontStyle;
 
         public long getId() {
             return mId;
@@ -118,12 +130,21 @@ public class FontsFragment extends Fragment {
             mSampleText = text;
         }
 
-        public Typeface getTypeface() {
-            return mTypeface;
+        public Typeface getFontFamily() {
+            return mFontFamily;
         }
 
-        public void setTypeface(Typeface typeface) {
-            mTypeface = typeface;
+        public int getFontStyle() {
+            return mFontStyle;
+        }
+
+
+        public void setTypeface(Typeface fontFamily) {
+            mFontFamily = fontFamily;
+        }
+        public void setTypeface(Typeface fontFamily, int fontStyle) {
+            mFontFamily = fontFamily;
+            mFontStyle = fontStyle;
         }
     }
 }
