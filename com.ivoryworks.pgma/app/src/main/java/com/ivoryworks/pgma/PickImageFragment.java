@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,9 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -35,6 +38,7 @@ public class PickImageFragment extends Fragment {
     private Toast mToast;
     private MenuItem mMenuShare;
     private View mParentView;
+    private TextView mTextView;
 
     public static PickImageFragment newInstance() {
         PickImageFragment fragment = new PickImageFragment();
@@ -59,6 +63,7 @@ public class PickImageFragment extends Fragment {
         // Inflate the layout for this fragment
         mParentView = inflater.inflate(R.layout.fragment_pick_image, container, false);
 
+        mTextView = (TextView) mParentView.findViewById(R.id.photoExif);
         mPreviewPhoto = (ImageView) mParentView.findViewById(R.id.previewPhoto);
 
         Intent intent = getActivity().getIntent();
@@ -136,11 +141,13 @@ public class PickImageFragment extends Fragment {
         case REQ_CODE_ACTION_OPEN_DOCUMENT:
             if (resultCode == Activity.RESULT_OK) {
                 setImage(data.getData());
+                loadExif(data.getData());
             }
             break;
         case REQ_CODE_ACTION_IMAGE_CAPTURE:
             if (resultCode == Activity.RESULT_OK) {
                 setImage(mPhotoUri);
+                loadExif(data.getData());
             }
             break;
         }
@@ -155,6 +162,28 @@ public class PickImageFragment extends Fragment {
         Bitmap photoBitmap = BitmapFactory.decodeFile(imagePath);
         int orientation = Utils.getOrientationType(imagePath);
         mPreviewPhoto.setImageBitmap(Utils.rotateBitmap(photoBitmap, orientation));
+    }
+
+    private void loadExif(Uri imageUri) {
+        try {
+            ExifInterface exif = new ExifInterface(imageUri.getPath());
+            String exifInfoText = "";
+            exifInfoText += String.format("size:%d x %d\n",
+                    exif.getAttributeInt(ExifInterface.TAG_IMAGE_WIDTH, -1),
+                    exif.getAttributeInt(ExifInterface.TAG_IMAGE_LENGTH, -1));
+            exifInfoText += String.format("date:%s\n",
+                    exif.getAttribute(ExifInterface.TAG_DATETIME));
+            String[] tags = {ExifInterface.TAG_DATETIME, ExifInterface.TAG_ISO, ExifInterface.TAG_MAKE, ExifInterface.TAG_MODEL, ExifInterface.TAG_ORIENTATION};
+            for (String tag : tags) {
+                exifInfoText += String.format("%s:%s\n",
+                        tag,
+                        exif.getAttribute(ExifInterface.TAG_DATETIME));
+            }
+
+            mTextView.setText(exifInfoText);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Uri createPhotoUri() {
