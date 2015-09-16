@@ -166,18 +166,15 @@ public class PickImageFragment extends Fragment {
 
     private void loadExif(Uri imageUri) {
         try {
-            ExifInterface exif = new ExifInterface(imageUri.getPath());
+            ExifInterface exif = new ExifInterface(Utils.getPath(getActivity(), imageUri));
             String exifInfoText = "";
             exifInfoText += String.format("size:%d x %d\n",
                     exif.getAttributeInt(ExifInterface.TAG_IMAGE_WIDTH, -1),
                     exif.getAttributeInt(ExifInterface.TAG_IMAGE_LENGTH, -1));
-            exifInfoText += String.format("date:%s\n",
-                    exif.getAttribute(ExifInterface.TAG_DATETIME));
-            String[] tags = {ExifInterface.TAG_DATETIME, ExifInterface.TAG_ISO, ExifInterface.TAG_MAKE, ExifInterface.TAG_MODEL, ExifInterface.TAG_ORIENTATION};
+            String[] tags = {ExifInterface.TAG_DATETIME, ExifInterface.TAG_ISO,
+                    ExifInterface.TAG_MAKE, ExifInterface.TAG_MODEL, ExifInterface.TAG_ORIENTATION};
             for (String tag : tags) {
-                exifInfoText += String.format("%s:%s\n",
-                        tag,
-                        exif.getAttribute(ExifInterface.TAG_DATETIME));
+                exifInfoText += String.format("%s:%s\n", tag, exif.getAttribute(tag));
             }
 
             mTextView.setText(exifInfoText);
