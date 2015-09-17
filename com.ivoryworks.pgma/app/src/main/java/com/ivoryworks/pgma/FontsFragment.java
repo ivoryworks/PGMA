@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class FontsFragment extends Fragment {
@@ -70,7 +71,6 @@ public class FontsFragment extends Fragment {
     }
 
     public class FontsAdapter extends BaseAdapter {
-
         LayoutInflater mLayoutInflater;
         ArrayList<FontItem> mFontList;
 
@@ -100,16 +100,21 @@ public class FontsFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = mLayoutInflater.inflate(R.layout.listitem_font, parent,false);
-            TextView fontName = (TextView)convertView.findViewById(R.id.sample_text);
-            fontName.setTypeface(mFontList.get(position).getFontFamily(),
-                    mFontList.get(position).getFontStyle());
+            TextView fontName = (TextView)convertView.findViewById(R.id.font_name);
+            fontName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
             fontName.setText(mFontList.get(position).getSampleText());
+
+            TextView sampleText = (TextView)convertView.findViewById(R.id.sample_text);
+            sampleText.setTypeface(mFontList.get(position).getFontFamily(),
+                    mFontList.get(position).getFontStyle());
+            sampleText.setText(R.string.sample_text);
             return convertView;
         }
     }
 
     private class FontItem {
         private long mId;
+        private String mFontName;
         private String mSampleText;
         private Typeface mFontFamily;
         private int mFontStyle;
@@ -120,6 +125,14 @@ public class FontsFragment extends Fragment {
 
         public void setId(long id) {
             mId = id;
+        }
+
+        public String getFontName() {
+            return mFontName;
+        }
+
+        public void setFontName(String name) {
+            mFontName = name;
         }
 
         public String getSampleText() {

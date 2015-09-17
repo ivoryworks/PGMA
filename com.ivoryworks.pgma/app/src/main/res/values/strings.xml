@@ -60,4 +60,6 @@
 
     <string name="msg_please_wait">Please wait...</string>
     <string name="msg_share_file_not_fond">Share file can not be found.</string>
+
+    <string name="sample_text">01234 ABCDefgh あいうえお カキクケコ</string>
 </resources>
