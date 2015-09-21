@@ -1,11 +1,8 @@
 package com.ivoryworks.pgma;
 
-import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
-import android.support.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
@@ -14,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -21,12 +19,29 @@ import static junit.framework.Assert.assertTrue;
 public class PickImageFragmentTest {
     private UiDevice mDevice;
     private int mLoopCnt;
+    private String FILE_NOT_FOUND = "Share file can not be found.";
+    private UiSelector mSelectorShare;
+    private UiSelector mSelectorCamera;
+    private UiSelector mSelectorGallery;
+    private UiSelector mSelectorCamShutter;
+    private UiSelector mSelectorCamDone;
+    private UiSelector mSelectorCamReTake;
+    private UiSelector mSelectorCamCancel;
 
     @Before
     public void setup() {
         // Initialize
         mLoopCnt = Integer.valueOf(System.getProperty("loop", "1"));
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+
+        mSelectorShare = new UiSelector().description("share");
+        mSelectorCamera = new UiSelector().description("camera");
+        mSelectorGallery = new UiSelector().description("gallery");
+        mSelectorCamShutter = new UiSelector().resourceId("com.android.camera2:id/shutter_button");
+        mSelectorCamDone = new UiSelector().resourceId("com.android.camera2:id/done_button");
+        mSelectorCamReTake = new UiSelector().resourceId("com.android.camera2:id/retake_button");
+        mSelectorCamCancel = new UiSelector().resourceId("com.android.camera2:id/cancel_button");
+
         Tools.goToHome(mDevice);
         Tools.startPGMA(mDevice);
 
@@ -42,18 +57,14 @@ public class PickImageFragmentTest {
 
     @Test
     public void testButtonExists() {
-        UiSelector share = new UiSelector().description("share");
-        UiSelector camera = new UiSelector().description("camera");
-        UiSelector gallery = new UiSelector().description("gallery");
-
-        assertTrue(mDevice.findObject(share).exists());
-        assertTrue(mDevice.findObject(camera).exists());
-        assertTrue(mDevice.findObject(gallery).exists());
+        assertTrue(mDevice.findObject(mSelectorShare).exists());
+        assertTrue(mDevice.findObject(mSelectorCamera).exists());
+        assertTrue(mDevice.findObject(mSelectorGallery).exists());
 
         try {
-            assertTrue(mDevice.findObject(share).isEnabled());
-            assertTrue(mDevice.findObject(camera).isEnabled());
-            assertTrue(mDevice.findObject(gallery).isEnabled());
+            assertTrue(mDevice.findObject(mSelectorShare).isEnabled());
+            assertTrue(mDevice.findObject(mSelectorCamera).isEnabled());
+            assertTrue(mDevice.findObject(mSelectorGallery).isEnabled());
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }
@@ -62,10 +73,24 @@ public class PickImageFragmentTest {
     @Test
     public void testShareFail() {
         try {
-            mDevice.findObject(new UiSelector().description("share")).click();
+            mDevice.findObject(mSelectorShare).click();
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }
-        assertTrue(mDevice.findObject(new UiSelector().text("Share file can not be found.")).exists());
+        assertTrue(mDevice.findObject(new UiSelector().text(FILE_NOT_FOUND)).exists());
+    }
+
+    @Test
+    public void testCamera() {
+        try {
+            mDevice.findObject(mSelectorCamera).clickAndWaitForNewWindow();
+            mDevice.findObject(mSelectorCamShutter).click();
+            mDevice.findObject(mSelectorCamDone).clickAndWaitForNewWindow();
+            mDevice.findObject(mSelectorShare).click();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+        assertFalse(mDevice.findObject(new UiSelector().text(FILE_NOT_FOUND)).exists());
+        mDevice.pressBack();    // close share chooser
     }
 }
