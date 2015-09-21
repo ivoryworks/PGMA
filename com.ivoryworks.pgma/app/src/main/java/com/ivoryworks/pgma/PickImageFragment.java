@@ -147,7 +147,7 @@ public class PickImageFragment extends Fragment {
         case REQ_CODE_ACTION_IMAGE_CAPTURE:
             if (resultCode == Activity.RESULT_OK) {
                 setImage(mPhotoUri);
-                loadExif(data.getData());
+                loadExif(mPhotoUri);
             }
             break;
         }
