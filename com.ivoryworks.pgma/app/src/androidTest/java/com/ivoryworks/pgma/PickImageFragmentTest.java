@@ -93,4 +93,18 @@ public class PickImageFragmentTest {
         assertFalse(mDevice.findObject(new UiSelector().text(FILE_NOT_FOUND)).exists());
         mDevice.pressBack();    // close share chooser
     }
+
+    @Test
+    public void testGallery() {
+        try {
+            mDevice.findObject(mSelectorGallery).clickAndWaitForNewWindow();
+            UiSelector selectorImage = new UiSelector().className("android.widget.ImageView").instance(0);
+            mDevice.findObject(selectorImage).clickAndWaitForNewWindow();
+            mDevice.findObject(mSelectorShare).click();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+        assertFalse(mDevice.findObject(new UiSelector().text(FILE_NOT_FOUND)).exists());
+        mDevice.pressBack();    // close share chooser
+    }
 }
