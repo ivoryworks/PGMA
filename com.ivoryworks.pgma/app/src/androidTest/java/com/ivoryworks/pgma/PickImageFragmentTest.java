@@ -1,5 +1,7 @@
 package com.ivoryworks.pgma;
 
+import android.os.RemoteException;
+import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
@@ -106,5 +108,42 @@ public class PickImageFragmentTest {
         }
         assertFalse(mDevice.findObject(new UiSelector().text(FILE_NOT_FOUND)).exists());
         mDevice.pressBack();    // close share chooser
+    }
+
+    @Test
+    public void testShare() {
+        try {
+            mDevice.findObject(mSelectorCamera).clickAndWaitForNewWindow();
+            mDevice.findObject(mSelectorCamShutter).click();
+            mDevice.findObject(mSelectorCamDone).clickAndWaitForNewWindow();
+            mDevice.findObject(mSelectorShare).click();
+            mDevice.findObject(new UiSelector().text("PGMA")).click();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testOrientation() {
+        try {
+            mDevice.setOrientationLeft();
+            mDevice.setOrientationRight();
+            mDevice.setOrientationNatural();
+            SystemClock.sleep(2000);
+
+            mDevice.findObject(mSelectorCamera).clickAndWaitForNewWindow();
+            mDevice.findObject(mSelectorCamShutter).click();
+            mDevice.findObject(mSelectorCamDone).clickAndWaitForNewWindow();
+            SystemClock.sleep(2000);
+
+            mDevice.setOrientationLeft();
+            mDevice.setOrientationRight();
+            mDevice.setOrientationNatural();
+            SystemClock.sleep(2000);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
