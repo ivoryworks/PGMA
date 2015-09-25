@@ -35,4 +35,11 @@ public class TouchFragmentTest {
             assertTrue(false);
         }
     }
+
+    @Test
+    public void testUpDown() {
+        int width = mDevice.getDisplayWidth();
+        int height = mDevice.getDisplayHeight();
+        mDevice.click(width / 2, height / 2);
+    }
 }
