@@ -18,10 +18,14 @@ import static junit.framework.Assert.assertTrue;
 @SdkSuppress(minSdkVersion = 18)
 public class TouchFragmentTest {
     private UiDevice mDevice;
+    private int mWidth;
+    private int mHeight;
 
     @Before
     public void setup() {
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        mWidth = mDevice.getDisplayWidth();
+        mHeight = mDevice.getDisplayHeight();
 
         Tools.goToHome(mDevice);
         Tools.startPGMA(mDevice);
@@ -38,8 +42,12 @@ public class TouchFragmentTest {
 
     @Test
     public void testUpDown() {
-        int width = mDevice.getDisplayWidth();
-        int height = mDevice.getDisplayHeight();
-        mDevice.click(width / 2, height / 2);
+        mDevice.click(mWidth / 2, mHeight / 2);
+    }
+
+    @Test
+    public void testSwipe() {
+        mDevice.swipe(mWidth / 2, mHeight / 2, mWidth / 2 + 100, mHeight / 2, 30);
+
     }
 }
