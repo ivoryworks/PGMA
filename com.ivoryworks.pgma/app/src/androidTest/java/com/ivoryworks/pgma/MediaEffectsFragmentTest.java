@@ -51,6 +51,17 @@ public class MediaEffectsFragmentTest {
         SystemClock.sleep(5000);
     }
 
+    @Test
+    public void testEffects() {
+        mDevice.pressMenu();
+        try {
+            mDevice.findObject(new UiSelector().text("EFFECT_AUTOFIX")).clickAndWaitForNewWindow();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+        SystemClock.sleep(5000);
+    }
+
     private boolean clickListTextAndWait(String text) {
         try {
             findTextInListView(text).clickAndWaitForNewWindow();
