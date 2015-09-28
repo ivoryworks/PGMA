@@ -1,5 +1,6 @@
 package com.ivoryworks.pgma;
 
+import android.os.RemoteException;
 import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
@@ -49,5 +50,17 @@ public class TouchFragmentTest {
     public void testSwipe() {
         mDevice.swipe(mWidth / 2, mHeight / 2, mWidth / 2 + 100, mHeight / 2, 30);
 
+    }
+
+    @Test
+    public void testOrientation() {
+        try {
+            mDevice.setOrientationLeft();
+            mDevice.setOrientationRight();
+            mDevice.setOrientationNatural();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        SystemClock.sleep(5000);
     }
 }
