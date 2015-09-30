@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.leakcanary.LeakCanary;
+
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -32,6 +34,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LeakCanary.install(getApplication());
         mFragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
 
