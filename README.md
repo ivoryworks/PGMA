@@ -27,6 +27,7 @@ Target version:22(Lollipop)
   - ListView, Adapter and  Loader
 1. Media Effects
 1. Gallery
+  - GridView
 1. Fonts
     - frameworkのTypefaceを使用
     - assetsに保持したフォントファイルを使用
