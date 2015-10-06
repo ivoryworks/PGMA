@@ -8,15 +8,22 @@ Target version:22(Lollipop)
   - ギャラリー連携
   - 画像の共有
   - SnackBar
+  - MediaStoreURI
+  - SharedPreferences
 1. Pick image2(chooser mix)
   - Floating Action Button(FAB)
   - カメラ連携とギャラリー連携のIntentを1つに
 1. Stopwatch
   - AsyncTask
+  - システム時刻(ミリ秒)を得る
+  - String#format() 文字列のフォーマッティング
 1. Image rotate(octocat 8)
   - マトリクスによる画像の回転
+  - GridLayout
 1. Progress variation
 1. Image crop
+  - Inputstream
+  - 画像の切抜き
 1. Image mix
 1. Touch
   - TouchEvent
