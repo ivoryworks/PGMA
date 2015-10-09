@@ -21,7 +21,7 @@
     <string name="title_media_effects">Media Effects</string>
     <string name="title_gallery">Gallery</string>
     <string name="title_fonts">Fonts</string>
-    <string name="title_edit_and_view">Edit and View</string>
+    <string name="title_text_watcher">TextWatcher</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

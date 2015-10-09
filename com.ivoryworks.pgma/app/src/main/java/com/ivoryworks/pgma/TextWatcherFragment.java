@@ -10,23 +10,23 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class EditAndViewFragment extends Fragment implements TextWatcher {
+public class TextWatcherFragment extends Fragment implements TextWatcher {
 
-    public static String TAG = EditAndViewFragment.class.getSimpleName();
+    public static String TAG = TextWatcherFragment.class.getSimpleName();
     EditText mEditText;
     TextView mTextView;
 
-    public static EditAndViewFragment newInstance() {
-        return new EditAndViewFragment();
+    public static TextWatcherFragment newInstance() {
+        return new TextWatcherFragment();
     }
 
-    public EditAndViewFragment() {
+    public TextWatcherFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_and_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_text_watcher, container, false);
 
         mTextView = (TextView) view.findViewById(R.id.textView);
 

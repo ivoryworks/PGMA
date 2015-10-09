@@ -29,6 +29,6 @@
         <item>@string/title_media_effects</item>
         <item>@string/title_gallery</item>
         <item>@string/title_fonts</item>
-        <item>@string/title_edit_and_view</item>
+        <item>@string/title_text_watcher</item>
     </string-array>
 </resources>

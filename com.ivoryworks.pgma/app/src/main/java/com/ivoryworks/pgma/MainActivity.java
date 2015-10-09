@@ -118,9 +118,9 @@ public class MainActivity extends ActionBarActivity
             tag = FontsFragment.TAG;
             fragment = FontsFragment.newInstance();
             break;
-        case R.string.title_edit_and_view:
-            tag = EditAndViewFragment.TAG;
-            fragment = EditAndViewFragment.newInstance();
+        case R.string.title_text_watcher:
+            tag = TextWatcherFragment.TAG;
+            fragment = TextWatcherFragment.newInstance();
             break;
         case R.string.title_top:
         default:
