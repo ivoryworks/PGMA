@@ -16,9 +16,13 @@ import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+
+import static junit.framework.Assert.assertTrue;
 
 public class Utils {
 

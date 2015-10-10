@@ -32,8 +32,7 @@ public class MediaEffectsFragmentTest {
         Tools.startPGMA(mDevice);
 
         // open Navigation drawer
-        Tools.openNavigationDrawer(mDevice);
-        clickListTextAndWait("Media Effects");
+        Tools.clickNavigationDrawerItem(mDevice, "Media Effects");
     }
 
     @Test

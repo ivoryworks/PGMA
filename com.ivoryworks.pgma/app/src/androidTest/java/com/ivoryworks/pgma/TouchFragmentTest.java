@@ -32,13 +32,7 @@ public class TouchFragmentTest {
         Tools.startPGMA(mDevice);
 
         // open Navigation drawer
-        Tools.openNavigationDrawer(mDevice);
-        try {
-            mDevice.findObject(new UiSelector().text("Touch")).clickAndWaitForNewWindow();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-            assertTrue(false);
-        }
+        Tools.clickNavigationDrawerItem(mDevice, "Touch");
     }
 
     @Test

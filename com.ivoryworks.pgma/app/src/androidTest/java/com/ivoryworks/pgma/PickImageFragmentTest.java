@@ -48,13 +48,7 @@ public class PickImageFragmentTest {
         Tools.startPGMA(mDevice);
 
         // open Navigation drawer
-        Tools.openNavigationDrawer(mDevice);
-        try {
-            mDevice.findObject(new UiSelector().text("Pick image")).clickAndWaitForNewWindow();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-            assertTrue(false);
-        }
+        Tools.clickNavigationDrawerItem(mDevice, "Pick image");
     }
 
     @Test

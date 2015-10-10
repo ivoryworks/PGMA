@@ -7,8 +7,15 @@ import android.content.pm.ResolveInfo;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiScrollable;
+import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
@@ -38,6 +45,19 @@ public class Tools {
         int width = device.getDisplayWidth();
         int height = device.getDisplayHeight();
         device.swipe(0, height / 2, (int) (width * .75), height / 2, SWIPE_STEP);
+    }
+
+    public static void clickNavigationDrawerItem(UiDevice device, String name) {
+        Tools.openNavigationDrawer(device);
+        UiScrollable scroller = new UiScrollable(new UiSelector().className(ListView.class.getName()));
+        scroller.setAsVerticalList();   // スクロール方向指定
+        try {
+            UiObject target = scroller.getChildByText(new UiSelector().className(TextView.class.getName()), name);
+            target.clickAndWaitForNewWindow();
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+            assertTrue(false);
+        }
     }
 
     public static void closeNavigationDrawer(UiDevice device) {

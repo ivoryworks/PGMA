@@ -33,16 +33,7 @@ public class TextWatcherFragmentTest {
         Tools.startPGMA(mDevice);
 
         // open Navigation drawer
-        Tools.openNavigationDrawer(mDevice);
-        UiScrollable scroller = new UiScrollable(new UiSelector().className(ListView.class.getName()));
-        scroller.setAsVerticalList();   // スクロール方向指定
-        try {
-            UiObject target = scroller.getChildByText(new UiSelector().className(TextView.class.getName()), "TextWatcher");
-            target.clickAndWaitForNewWindow();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-            assertTrue(false);
-        }
+        Tools.clickNavigationDrawerItem(mDevice, "TextWatcher");
     }
 
     @Test

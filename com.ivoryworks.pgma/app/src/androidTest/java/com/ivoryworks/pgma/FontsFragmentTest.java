@@ -28,13 +28,7 @@ public class FontsFragmentTest {
         Tools.startPGMA(mDevice);
 
         // open Navigation drawer
-        Tools.openNavigationDrawer(mDevice);
-        try {
-            mDevice.findObject(new UiSelector().text("Fonts")).clickAndWaitForNewWindow();
-        } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
-            assertTrue(false);
-        }
+        Tools.clickNavigationDrawerItem(mDevice, "Fonts");
     }
 
     @Test
