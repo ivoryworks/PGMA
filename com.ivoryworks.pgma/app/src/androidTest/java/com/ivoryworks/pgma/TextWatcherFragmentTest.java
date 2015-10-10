@@ -10,6 +10,7 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -41,6 +42,16 @@ public class TextWatcherFragmentTest {
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
             assertTrue(false);
+        }
+    }
+
+    @Test
+    public void testInputText() {
+        UiSelector editText = new UiSelector().className(EditText.class.getName());
+        try {
+            mDevice.findObject(editText).setText("Test message.");
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
