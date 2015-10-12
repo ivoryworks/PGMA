@@ -38,5 +38,5 @@ Target version:22(Lollipop)
 1. Fonts
     - frameworkのTypefaceを使用
     - assetsに保持したフォントファイルを使用
-1. Edit and Text
+1. TextWatcher
     - TextWatcher
