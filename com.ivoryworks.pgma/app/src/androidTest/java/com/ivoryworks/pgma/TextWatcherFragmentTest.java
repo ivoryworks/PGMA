@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -41,6 +42,20 @@ public class TextWatcherFragmentTest {
         UiSelector editText = new UiSelector().className(EditText.class.getName());
         try {
             mDevice.findObject(editText).setText("Test message.");
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testTextWatcher() {
+        String inputText = "Test message.";
+        UiSelector editText = new UiSelector().className(EditText.class.getName());
+        UiSelector textView = new UiSelector().resourceId("com.ivoryworks.pgma:id/textView");
+        try {
+            mDevice.findObject(editText).setText(inputText);
+            assertTrue(inputText.equals(mDevice.findObject(textView).getText()));
+            assertFalse("not equals".equals(mDevice.findObject(textView).getText()));
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }
