@@ -122,6 +122,10 @@ public class MainActivity extends ActionBarActivity
             tag = TextWatcherFragment.TAG;
             fragment = TextWatcherFragment.newInstance();
             break;
+        case R.string.title_pinch:
+            tag = PinchFragment.TAG;
+            fragment = PinchFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;
