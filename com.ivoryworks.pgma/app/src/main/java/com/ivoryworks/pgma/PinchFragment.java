@@ -24,8 +24,10 @@ public class PinchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pinch, container, false);
+        PinchGestureDetectView detectView = new PinchGestureDetectView(getActivity());
+        detectView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
 
-        return view;
+        return detectView;
     }
 }
