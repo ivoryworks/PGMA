@@ -40,3 +40,5 @@ Target version:22(Lollipop)
     - assetsに保持したフォントファイルを使用
 1. TextWatcher
     - TextWatcher
+1. Pinch
+    - ScaleGestureDetector(Pinch-in/Pinch-out)
