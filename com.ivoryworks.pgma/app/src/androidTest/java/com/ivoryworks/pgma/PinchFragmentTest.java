@@ -6,6 +6,8 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +27,17 @@ public class PinchFragmentTest {
 
         // open Navigation drawer
         Tools.clickNavigationDrawerItem(mDevice, "Pinch");
+    }
+
+    @Test
+    public void testPinchIn() {
+        UiSelector selector = new UiSelector().className(PinchGestureDetectView.class.getName());
+        try {
+            // Todo:働いていないようにみえる
+            mDevice.findObject(selector).pinchIn(70, 20);
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
