@@ -25,16 +25,16 @@ public class PinchGestureDetectView extends View {
 
         @Override
         public void onScaleEnd(ScaleGestureDetector detector) {
-            Log.d(TAG, "onScaleEnd : "+ detector.getScaleFactor());
             mScaleFactor *= detector.getScaleFactor();
+            Log.d(TAG, "onScaleEnd : "+ detector.getScaleFactor() + " mScaleFactor : " + mScaleFactor);
             invalidate();
             super.onScaleEnd(detector);
         }
 
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
-            Log.d(TAG, "onScale : "+ detector.getScaleFactor());
             mScaleFactor *= detector.getScaleFactor();
+            Log.d(TAG, "onScale : "+ detector.getScaleFactor() + " mScaleFactor : " + mScaleFactor);
             invalidate();
             return true;
         };
@@ -51,7 +51,14 @@ public class PinchGestureDetectView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.save();
-        canvas.scale(mScaleFactor, mScaleFactor);
+
+        int scaledWidth = (int) (mImage.getIntrinsicWidth() * mScaleFactor);
+        int scaledHeight = (int) (mImage.getIntrinsicHeight() * mScaleFactor);
+        int baseX = (getWidth() - scaledWidth) / 2;
+        int baseY = (getHeight() - scaledHeight) / 2;
+
+        mImage.setBounds(baseX, baseY, baseX + scaledWidth, baseY + scaledHeight);
+
         mImage.draw(canvas);
         canvas.restore();
     }
