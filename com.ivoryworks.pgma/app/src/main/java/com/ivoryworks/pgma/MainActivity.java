@@ -126,6 +126,10 @@ public class MainActivity extends ActionBarActivity
             tag = PinchFragment.TAG;
             fragment = PinchFragment.newInstance();
             break;
+        case R.string.title_canvas:
+            tag = CanvasFragment.TAG;
+            fragment = CanvasFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;
