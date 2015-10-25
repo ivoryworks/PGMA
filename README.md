@@ -25,6 +25,7 @@ Target version:22(Lollipop)
   - Inputstream
   - 画像の切抜き
 1. Image mix
+1. Canvas
 1. Touch
   - TouchEvent
   - MotionEvent
