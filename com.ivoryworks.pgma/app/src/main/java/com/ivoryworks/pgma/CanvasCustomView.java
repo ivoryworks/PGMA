@@ -39,5 +39,10 @@ public class CanvasCustomView extends View {
         // Rect
         mPaint.setColor(Color.DKGRAY);
         canvas.drawRect(centerX-100, centerY-100, centerX+100, centerY+100, mPaint);
+
+        // Circle
+        mPaint.setColor(Color.argb(192, 255, 64, 64));
+        mPaint.setAntiAlias(true);
+        canvas.drawCircle(50.5f, 30.5f, 50.0f, mPaint);
     }
 }
