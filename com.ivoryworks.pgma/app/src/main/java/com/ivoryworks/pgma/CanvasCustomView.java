@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -38,11 +39,16 @@ public class CanvasCustomView extends View {
 
         // Rect
         mPaint.setColor(Color.DKGRAY);
-        canvas.drawRect(centerX-100, centerY-100, centerX+100, centerY+100, mPaint);
+        canvas.drawRect(centerX - 100, centerY - 100, centerX + 100, centerY + 100, mPaint);
 
         // Circle
         mPaint.setColor(Color.argb(192, 255, 64, 64));
         mPaint.setAntiAlias(true);
         canvas.drawCircle(50.5f, 30.5f, 50.0f, mPaint);
+
+        // Oval
+        mPaint.setColor(Color.argb(192, 255, 64, 255));
+        RectF ovalF = new RectF(centerX - 200, centerY - 100, centerX + 200, centerY + 100);
+        canvas.drawOval(ovalF, mPaint);
     }
 }
