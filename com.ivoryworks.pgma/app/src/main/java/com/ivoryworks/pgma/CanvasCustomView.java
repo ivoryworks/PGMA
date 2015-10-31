@@ -27,8 +27,8 @@ public class CanvasCustomView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int centerX = canvas.getWidth() / 2;
-        int centerY = canvas.getHeight() / 2;
+        final int centerX = canvas.getWidth() / 2;
+        final int centerY = canvas.getHeight() / 2;
 
         // Background
         canvas.drawColor(Color.parseColor("#330000cc"));
@@ -42,11 +42,17 @@ public class CanvasCustomView extends View {
         canvas.drawRect(centerX - 100, centerY - 100, centerX + 100, centerY + 100, mPaint);
 
         // Circle
-        mPaint.setColor(Color.argb(192, 255, 64, 64));
+        mPaint.setColor(Color.argb(192, 64, 255, 64));
         mPaint.setAntiAlias(true);
-        canvas.drawCircle(50.5f, 30.5f, 50.0f, mPaint);
+        canvas.drawCircle(centerX, centerY + 500, 300, mPaint);
+
+        mPaint.setStyle(Paint.Style.STROKE);    // 塗りつぶさない
+        mPaint.setColor(Color.argb(255, 64, 255, 255));
+        canvas.drawCircle(centerX, centerY + 500, 310, mPaint);
+
 
         // Oval
+        mPaint.setStyle(Paint.Style.FILL);    // 塗りつぶす
         mPaint.setColor(Color.argb(192, 255, 64, 255));
         RectF ovalF = new RectF(centerX - 200, centerY - 100, centerX + 200, centerY + 100);
         canvas.drawOval(ovalF, mPaint);
