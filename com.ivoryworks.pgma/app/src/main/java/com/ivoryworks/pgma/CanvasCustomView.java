@@ -50,11 +50,14 @@ public class CanvasCustomView extends View {
         mPaint.setColor(Color.argb(255, 64, 255, 255));
         canvas.drawCircle(centerX, centerY + 500, 310, mPaint);
 
-
         // Oval
         mPaint.setStyle(Paint.Style.FILL);    // 塗りつぶす
         mPaint.setColor(Color.argb(192, 255, 64, 255));
         RectF ovalF = new RectF(centerX - 200, centerY - 100, centerX + 200, centerY + 100);
         canvas.drawOval(ovalF, mPaint);
+
+        // Line
+        mPaint.setColor(Color.argb(192, 0, 0, 255));
+        canvas.drawLine(0, 0, canvas.getWidth(), canvas.getHeight(), mPaint);
     }
 }
