@@ -33,6 +33,8 @@ public class CanvasCustomView extends View {
         // Background
         canvas.drawColor(Color.parseColor("#330000cc"));
 
+        mPaint.setAntiAlias(true);
+
         // Text
         mPaint.setTextSize(48);
         canvas.drawText("Canvas draw", 50, 50, mPaint);
@@ -43,7 +45,6 @@ public class CanvasCustomView extends View {
 
         // Circle
         mPaint.setColor(Color.argb(192, 64, 255, 64));
-        mPaint.setAntiAlias(true);
         canvas.drawCircle(centerX, centerY + 500, 300, mPaint);
 
         mPaint.setStyle(Paint.Style.STROKE);    // 塗りつぶさない
