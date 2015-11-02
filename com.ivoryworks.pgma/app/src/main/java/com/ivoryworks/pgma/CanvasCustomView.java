@@ -56,6 +56,11 @@ public class CanvasCustomView extends View {
         RectF ovalF = new RectF(centerX - 200, centerY - 100, centerX + 200, centerY + 100);
         canvas.drawOval(ovalF, mPaint);
 
+        // KADOMARU
+        mPaint.setColor(Color.argb(192, 128, 128, 128));
+        RectF rectf = new RectF(centerX - 200, centerY + 150, centerX + 200, centerY + 200);
+        canvas.drawRoundRect(rectf, 20, 20, mPaint);
+
         // Line
         mPaint.setColor(Color.argb(192, 0, 0, 255));
         canvas.drawLine(0, 0, canvas.getWidth(), canvas.getHeight(), mPaint);
