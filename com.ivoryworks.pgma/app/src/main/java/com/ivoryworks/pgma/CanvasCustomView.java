@@ -65,5 +65,14 @@ public class CanvasCustomView extends View {
         // Line
         mPaint.setColor(Color.argb(192, 0, 0, 255));
         canvas.drawLine(0, 0, canvas.getWidth(), canvas.getHeight(), mPaint);
+
+        // Line(点線)
+        mPaint.setStrokeWidth(2.0f);
+        for (int i = canvas.getHeight(); i > 0; i--) {
+            if (i % 5 != 0) {
+                continue;
+            }
+            canvas.drawPoint(canvas.getWidth() - i, i, mPaint);
+        }
     }
 }
