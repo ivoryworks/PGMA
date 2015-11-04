@@ -32,5 +32,6 @@
         <item>@string/title_text_watcher</item>
         <item>@string/title_pinch</item>
         <item>@string/title_canvas</item>
+        <item>@string/title_notification</item>
     </string-array>
 </resources>
