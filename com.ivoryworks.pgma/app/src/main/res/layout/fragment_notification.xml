@@ -11,4 +11,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_notification_text"
+        android:id="@+id/button_text"
+        android:layout_below="@+id/button_simple"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

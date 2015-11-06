@@ -1,6 +1,7 @@
 package com.ivoryworks.pgma;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
@@ -16,6 +17,7 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
 
     public static String TAG = NotificationFragment.class.getSimpleName();
     private final int NOTIFICATION_ICON_ONLY = 1;
+    private final int NOTIFICATION_TEXT = 1;
     private Context mContext;
 
     public static NotificationFragment newInstance() {
@@ -32,17 +34,28 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
         Button btnSimple = (Button) view.findViewById(R.id.button_simple);
         btnSimple.setOnClickListener(this);
+        Button btnText = (Button) view.findViewById(R.id.button_text);
+        btnText.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onClick(View v) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        NotificationManagerCompat manager = NotificationManagerCompat.from(mContext);
         switch (v.getId()) {
         case R.id.button_simple:
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
-            builder.setSmallIcon(R.mipmap.ic_launcher);
-            NotificationManagerCompat manager = NotificationManagerCompat.from(mContext);
             manager.notify(NOTIFICATION_ICON_ONLY, builder.build());
+            break;
+        case R.id.button_text:
+            Resources res = mContext.getResources();
+            builder.setContentTitle(res.getString(R.string.notification_title));    // 1行目
+            builder.setContentText(res.getString(R.string.notification_text));      // 2行目
+            builder.setSubText(res.getString(R.string.notification_subtext));       // 3行目
+            builder.setContentInfo(res.getString(R.string.notification_info));      // 右下
+            builder.setWhen(System.currentTimeMillis());                            // 時刻情報
+            manager.notify(NOTIFICATION_TEXT, builder.build());
             break;
         }
     }
