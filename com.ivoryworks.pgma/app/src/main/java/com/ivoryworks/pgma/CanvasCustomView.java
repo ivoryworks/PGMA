@@ -9,12 +9,15 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import static com.ivoryworks.pgma.R.color.fab_red;
 
-public class CanvasCustomView extends View {
+public class CanvasCustomView extends View implements View.OnTouchListener {
     private Paint mPaint = new Paint();
+    private float mTouchX = 0;
+    private float mTouchY = 0;
 
     public CanvasCustomView(Context context) {
         super(context);
@@ -22,6 +25,7 @@ public class CanvasCustomView extends View {
 
     public CanvasCustomView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
+        setOnTouchListener(this);
     }
 
     @Override
@@ -74,5 +78,17 @@ public class CanvasCustomView extends View {
             }
             canvas.drawPoint(canvas.getWidth() - i, i, mPaint);
         }
+
+        // Touch pointer
+        mPaint.setColor(Color.argb(192, 64, 64, 255));
+        canvas.drawCircle(mTouchX, mTouchY, 50, mPaint);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        mTouchX = event.getX();
+        mTouchY = event.getY();
+        invalidate();
+        return false;
     }
 }
