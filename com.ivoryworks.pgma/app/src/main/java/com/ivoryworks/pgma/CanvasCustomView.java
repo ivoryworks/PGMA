@@ -1,18 +1,14 @@
 package com.ivoryworks.pgma;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
-import static com.ivoryworks.pgma.R.color.fab_red;
 
 public class CanvasCustomView extends View implements View.OnTouchListener {
     private Paint mPaint = new Paint();
@@ -78,6 +74,15 @@ public class CanvasCustomView extends View implements View.OnTouchListener {
             }
             canvas.drawPoint(canvas.getWidth() - i, i, mPaint);
         }
+
+        // Path
+        mPaint.setColor(Color.GREEN);
+        Path path = new Path();
+        path.moveTo(centerX, centerY);
+        path.lineTo(centerX + 50, centerY + 100);
+        path.lineTo(centerX - 50, centerY + 100);
+        path.lineTo(centerX, centerY);
+        canvas.drawPath(path, mPaint);
 
         // Touch pointer
         mPaint.setColor(Color.argb(192, 64, 64, 255));
