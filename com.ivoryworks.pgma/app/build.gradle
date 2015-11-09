@@ -25,6 +25,8 @@ android {
         debug {
             // 最適化
             zipAlignEnabled true
+            // デバッグパッケージ名の接尾辞
+            applicationIdSuffix ".debug"
         }
     }
 }
