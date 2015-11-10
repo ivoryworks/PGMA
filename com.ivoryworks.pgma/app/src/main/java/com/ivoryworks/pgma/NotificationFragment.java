@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RemoteViews;
+import android.widget.TextView;
 
 import static android.support.v7.app.NotificationCompat.*;
 
@@ -17,7 +19,8 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
 
     public static String TAG = NotificationFragment.class.getSimpleName();
     private final int NOTIFICATION_ICON_ONLY = 1;
-    private final int NOTIFICATION_TEXT = 1;
+    private final int NOTIFICATION_TEXT = 2;
+    private final int NOTIFICATION_CUSTOM = 3;
     private Context mContext;
 
     public static NotificationFragment newInstance() {
@@ -32,10 +35,15 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
                              Bundle savedInstanceState) {
         mContext = getActivity().getApplicationContext();
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
+
         Button btnSimple = (Button) view.findViewById(R.id.button_simple);
         btnSimple.setOnClickListener(this);
+
         Button btnText = (Button) view.findViewById(R.id.button_text);
         btnText.setOnClickListener(this);
+
+        Button btnCustom = (Button) view.findViewById(R.id.button_custom);
+        btnCustom.setOnClickListener(this);
         return view;
     }
 
@@ -56,6 +64,13 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
             builder.setContentInfo(res.getString(R.string.notification_info));      // 右下
             builder.setWhen(System.currentTimeMillis());                            // 時刻情報
             manager.notify(NOTIFICATION_TEXT, builder.build());
+            break;
+        case R.id.button_custom:
+            RemoteViews customView = new RemoteViews(mContext.getPackageName(), R.layout.notification_custom);
+            String title = mContext.getResources().getString(R.string.notification_title);
+            customView.setTextViewText(R.id.custom_title, title);
+            builder.setContent(customView);
+            manager.notify(NOTIFICATION_CUSTOM, builder.build());
             break;
         }
     }

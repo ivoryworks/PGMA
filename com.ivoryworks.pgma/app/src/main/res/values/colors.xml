@@ -4,4 +4,5 @@
     <color name="fab_red">#FF993333</color>
 
     <color name="background_dark">@color/pgma_dark</color>
+    <color name="notifycation_background">#66FF3333</color>
 </resources>

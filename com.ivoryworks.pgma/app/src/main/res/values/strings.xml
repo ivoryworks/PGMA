@@ -64,6 +64,7 @@
 
     <string name="label_notification_icon_only">Icon only</string>
     <string name="label_notification_text">Text</string>
+    <string name="label_notification_custom">Custom</string>
     <string name="notification_title">Notification title</string>
     <string name="notification_text">Text message</string>
     <string name="notification_subtext">sub text</string>
