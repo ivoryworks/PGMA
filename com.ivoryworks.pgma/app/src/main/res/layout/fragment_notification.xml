@@ -27,4 +27,12 @@
         android:id="@+id/button_custom"
         android:layout_below="@+id/button_text"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_notification_intent"
+        android:id="@+id/button_intent"
+        android:layout_below="@+id/button_custom"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

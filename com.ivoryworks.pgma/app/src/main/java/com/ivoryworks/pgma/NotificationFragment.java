@@ -1,8 +1,11 @@
 package com.ivoryworks.pgma;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.NotificationCompat;
@@ -18,9 +21,11 @@ import static android.support.v7.app.NotificationCompat.*;
 public class NotificationFragment extends Fragment implements View.OnClickListener{
 
     public static String TAG = NotificationFragment.class.getSimpleName();
+    private final int REQ_CODE_PROFILE = 10000;
     private final int NOTIFICATION_ICON_ONLY = 1;
     private final int NOTIFICATION_TEXT = 2;
     private final int NOTIFICATION_CUSTOM = 3;
+    private final int NOTIFICATION_INTENT = 4;
     private Context mContext;
 
     public static NotificationFragment newInstance() {
@@ -44,6 +49,9 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
 
         Button btnCustom = (Button) view.findViewById(R.id.button_custom);
         btnCustom.setOnClickListener(this);
+
+        Button btnIntent = (Button) view.findViewById(R.id.button_intent);
+        btnIntent.setOnClickListener(this);
         return view;
     }
 
@@ -71,6 +79,14 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
             customView.setTextViewText(R.id.custom_title, title);
             builder.setContent(customView);
             manager.notify(NOTIFICATION_CUSTOM, builder.build());
+            break;
+        case R.id.button_intent:
+            // 電話帳プロフィールを表示する
+            Intent intent = new Intent(Intent.ACTION_VIEW, ContactsContract.Profile.CONTENT_URI);
+            PendingIntent contentIntent = PendingIntent.getActivity(mContext, REQ_CODE_PROFILE, intent, PendingIntent.FLAG_ONE_SHOT);
+            builder.setContentIntent(contentIntent);
+            builder.setAutoCancel(true);    // タップしたら削除
+            manager.notify(NOTIFICATION_INTENT, builder.build());
             break;
         }
     }
