@@ -67,6 +67,7 @@
     <string name="label_notification_custom">Custom</string>
     <string name="label_notification_intent">Intent</string>
     <string name="notification_title">Notification title</string>
+    <string name="notification_title_open_profile">Open profile</string>
     <string name="notification_text">Text message</string>
     <string name="notification_subtext">sub text</string>
     <string name="notification_info">Info message</string>

@@ -57,6 +57,7 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        Resources res = mContext.getResources();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         NotificationManagerCompat manager = NotificationManagerCompat.from(mContext);
@@ -65,7 +66,6 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
             manager.notify(NOTIFICATION_ICON_ONLY, builder.build());
             break;
         case R.id.button_text:
-            Resources res = mContext.getResources();
             builder.setContentTitle(res.getString(R.string.notification_title));    // 1行目
             builder.setContentText(res.getString(R.string.notification_text));      // 2行目
             builder.setSubText(res.getString(R.string.notification_subtext));       // 3行目
@@ -85,6 +85,7 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
             Intent intent = new Intent(Intent.ACTION_VIEW, ContactsContract.Profile.CONTENT_URI);
             PendingIntent contentIntent = PendingIntent.getActivity(mContext, REQ_CODE_PROFILE, intent, PendingIntent.FLAG_ONE_SHOT);
             builder.setContentIntent(contentIntent);
+            builder.setContentTitle(res.getString(R.string.notification_title_open_profile));
             builder.setAutoCancel(true);    // タップしたら削除
             manager.notify(NOTIFICATION_INTENT, builder.build());
             break;
