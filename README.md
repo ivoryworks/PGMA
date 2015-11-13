@@ -44,3 +44,7 @@ Target version:22(Lollipop)
     - ScaleGestureDetector(Pinch-in/Pinch-out)
 1. Canvas
 1. Notification
+    - アイコンのみ
+    - フルタイトル
+    - カスタムView
+    - NotificationからのIntent発行
