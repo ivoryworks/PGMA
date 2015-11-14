@@ -22,7 +22,7 @@ import static org.junit.Assert.assertThat;
 public class Tools {
     public static final int LAUNCH_TIMEOUT = 5000;
     public static final int SWIPE_STEP = 30;
-    public static final String PGMA_PACKAGE = "com.ivoryworks.pgma";
+    public static final String PGMA_PACKAGE = "com.ivoryworks.pgma.debug";
 
     public static void startPGMA(UiDevice device) {
         Context context = InstrumentationRegistry.getContext();
