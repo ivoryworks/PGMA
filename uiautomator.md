@@ -76,6 +76,11 @@ UiObjectのlongClick()で事足りない時。
         ...
     }
 
+## Notification開く
+    int displayWidth = mDevice.getDisplayWidth();
+    int displayHeight = mDevice.getDisplayHeight();
+    mDevice.swipe(displayWidth/2, 0, displayWidth/2, displayHeight/2, SWIPE_STEP);
+
 ## コマンドラインからのテスト実行
     adb shell am instrument -w com.ivoryworks.pgma.test/android.support.test.runner.AndroidJUnitRunner
 
