@@ -63,7 +63,7 @@ public class Tools {
     public static void closeNavigationDrawer(UiDevice device) {
         int width = device.getDisplayWidth();
         int height = device.getDisplayHeight();
-        device.swipe((int)(width * .75), height / 2, 0, height / 2, SWIPE_STEP);
+        device.swipe((int) (width * .75), height / 2, 0, height / 2, SWIPE_STEP);
     }
 
     public static String getLauncherPackageName() {
@@ -75,5 +75,11 @@ public class Tools {
         PackageManager pm = InstrumentationRegistry.getContext().getPackageManager();
         ResolveInfo resolveInfo = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo.activityInfo.packageName;
+    }
+
+    public static void openNotification(UiDevice device) {
+        int displayWidth = device.getDisplayWidth();
+        int displayHeight = device.getDisplayHeight();
+        device.swipe(displayWidth/2, 0, displayWidth/2, displayHeight/2, SWIPE_STEP);
     }
 }

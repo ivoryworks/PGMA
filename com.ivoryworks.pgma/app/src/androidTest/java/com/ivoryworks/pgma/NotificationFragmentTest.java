@@ -37,11 +37,10 @@ public class NotificationFragmentTest {
         UiSelector selector = new UiSelector().resourceId("com.ivoryworks.pgma.debug:id/button_simple");
         try {
             mDevice.findObject(selector).click();
-            mDevice.openNotification();
+//            mDevice.openNotification();
+            Tools.openNotification(mDevice);
             UiSelector icon = new UiSelector().className(ImageView.class.getName()).resourceId("android:id/icon");
-            if (mDevice.findObject(icon).exists() == false) {
-                Assert.assertTrue(false);
-            }
+            Assert.assertTrue(mDevice.findObject(icon).exists());
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
             Assert.assertTrue(false);
