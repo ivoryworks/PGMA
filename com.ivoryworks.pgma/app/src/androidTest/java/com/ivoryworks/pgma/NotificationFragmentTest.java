@@ -9,6 +9,7 @@ import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import junit.framework.Assert;
 
@@ -30,6 +31,7 @@ public class NotificationFragmentTest {
 
         // open Navigation drawer
         Tools.clickNavigationDrawerItem(mDevice, "Notification");
+
     }
 
     @Test
@@ -41,6 +43,38 @@ public class NotificationFragmentTest {
             Tools.openNotification(mDevice);
             UiSelector icon = new UiSelector().className(ImageView.class.getName()).resourceId("android:id/icon");
             Assert.assertTrue(mDevice.findObject(icon).exists());
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+            Assert.assertTrue(false);
+        }
+    }
+
+    @Test
+    public void testTextNotification() {
+        UiSelector selector = new UiSelector().resourceId("com.ivoryworks.pgma.debug:id/button_text");
+        try {
+            mDevice.findObject(selector).click();
+            Tools.openNotification(mDevice);
+            // Icon
+            UiSelector icon = new UiSelector().className(ImageView.class.getName()).resourceId("android:id/icon");
+            Assert.assertTrue(mDevice.findObject(icon).exists());
+            // Title
+            UiSelector title = new UiSelector().className(TextView.class.getName()).resourceId("android:id/title");
+            Assert.assertTrue(mDevice.findObject(title).exists());
+            Assert.assertTrue(mDevice.findObject(title).getText().equals("Notification title"));
+            // Text
+            UiSelector text = new UiSelector().className(TextView.class.getName()).resourceId("android:id/text2");
+            Assert.assertTrue(mDevice.findObject(text).exists());
+            Assert.assertTrue(mDevice.findObject(text).getText().equals("Text message"));
+            // Sub Text
+            UiSelector subText = new UiSelector().className(TextView.class.getName()).resourceId("android:id/text");
+            Assert.assertTrue(mDevice.findObject(subText).exists());
+            Assert.assertTrue(mDevice.findObject(subText).getText().equals("sub text"));
+            // Sub Text
+            UiSelector info = new UiSelector().className(TextView.class.getName()).resourceId("android:id/info");
+            Assert.assertTrue(mDevice.findObject(info).exists());
+            Assert.assertTrue(mDevice.findObject(info).getText().equals("Info message"));
+
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
             Assert.assertTrue(false);
