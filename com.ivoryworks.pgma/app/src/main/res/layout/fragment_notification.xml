@@ -35,4 +35,15 @@
         android:id="@+id/button_intent"
         android:layout_below="@+id/button_custom"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remove_notifications"
+        android:id="@+id/button_remove"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/button_intent"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

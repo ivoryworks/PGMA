@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
@@ -22,10 +23,10 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
 
     public static String TAG = NotificationFragment.class.getSimpleName();
     private final int REQ_CODE_PROFILE = 10000;
-    private final int NOTIFICATION_ICON_ONLY = 1;
-    private final int NOTIFICATION_TEXT = 2;
-    private final int NOTIFICATION_CUSTOM = 3;
-    private final int NOTIFICATION_INTENT = 4;
+    private final int NOTIFICATION_ICON_ONLY = 98701;
+    private final int NOTIFICATION_TEXT = 98702;
+    private final int NOTIFICATION_CUSTOM = 98703;
+    private final int NOTIFICATION_INTENT = 98704;
     private Context mContext;
 
     public static NotificationFragment newInstance() {
@@ -52,6 +53,9 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
 
         Button btnIntent = (Button) view.findViewById(R.id.button_intent);
         btnIntent.setOnClickListener(this);
+
+        Button btnRemove = (Button) view.findViewById(R.id.button_remove);
+        btnRemove.setOnClickListener(this);
         return view;
     }
 
@@ -88,6 +92,12 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
             builder.setContentTitle(res.getString(R.string.notification_title_open_profile));
             builder.setAutoCancel(true);    // タップしたら削除
             manager.notify(NOTIFICATION_INTENT, builder.build());
+            break;
+        case R.id.button_remove:
+            manager.cancel(NOTIFICATION_ICON_ONLY);
+            manager.cancel(NOTIFICATION_TEXT);
+            manager.cancel(NOTIFICATION_CUSTOM);
+            manager.cancel(NOTIFICATION_INTENT);
             break;
         }
     }

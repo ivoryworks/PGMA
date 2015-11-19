@@ -71,6 +71,7 @@
     <string name="notification_text">Text message</string>
     <string name="notification_subtext">sub text</string>
     <string name="notification_info">Info message</string>
+    <string name="remove_notifications">Remove notifications</string>
 
     <string name="msg_please_wait">Please wait...</string>
     <string name="msg_share_file_not_fond">Share file can not be found.</string>
