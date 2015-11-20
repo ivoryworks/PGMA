@@ -21,10 +21,12 @@ import org.junit.runner.RunWith;
 @SdkSuppress(minSdkVersion = 18)
 public class NotificationFragmentTest {
     private UiDevice mDevice;
+    private UiSelector mRemoveBtn;
 
     @Before
     public void setup() {
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        mRemoveBtn = new UiSelector().resourceId("com.ivoryworks.pgma.debug:id/button_remove");
 
         Tools.goToHome(mDevice);
         Tools.startPGMA(mDevice);
@@ -43,6 +45,9 @@ public class NotificationFragmentTest {
             Tools.openNotification(mDevice);
             UiSelector icon = new UiSelector().className(ImageView.class.getName()).resourceId("android:id/icon");
             Assert.assertTrue(mDevice.findObject(icon).exists());
+
+            mDevice.pressBack();    // close Notification
+            mDevice.findObject(mRemoveBtn).click(); // Notification消去
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
             Assert.assertTrue(false);
@@ -75,6 +80,8 @@ public class NotificationFragmentTest {
             Assert.assertTrue(mDevice.findObject(info).exists());
             Assert.assertTrue(mDevice.findObject(info).getText().equals("Info message"));
 
+            mDevice.pressBack();    // close Notification
+            mDevice.findObject(mRemoveBtn).click(); // Notification消去
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
             Assert.assertTrue(false);
