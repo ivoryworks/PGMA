@@ -55,6 +55,31 @@ public class NotificationFragmentTest {
     }
 
     @Test
+    public void testIntentNotification() {
+        UiSelector selector = new UiSelector().resourceId("com.ivoryworks.pgma.debug:id/button_intent");
+        try {
+            mDevice.findObject(selector).click();
+
+            Tools.openNotification(mDevice);
+
+            // Icon
+            UiSelector icon = new UiSelector().className(ImageView.class.getName()).resourceId("android:id/icon");
+            Assert.assertTrue(mDevice.findObject(icon).exists());
+            // Title
+            UiSelector title = new UiSelector().className(TextView.class.getName()).resourceId("android:id/title");
+            Assert.assertTrue(mDevice.findObject(title).exists());
+            Assert.assertTrue(mDevice.findObject(title).getText().equals("Open profile"));
+
+            mDevice.findObject(title).click();
+
+            mDevice.pressBack();    // close Notification
+            mDevice.findObject(mRemoveBtn).click(); // Notification消去
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void testTextNotification() {
         UiSelector selector = new UiSelector().resourceId("com.ivoryworks.pgma.debug:id/button_text");
         try {
