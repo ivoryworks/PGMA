@@ -23,10 +23,10 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
 
     public static String TAG = NotificationFragment.class.getSimpleName();
     private final int REQ_CODE_PROFILE = 10000;
-    private final int NOTIFICATION_ICON_ONLY = 98701;
-    private final int NOTIFICATION_TEXT = 98702;
-    private final int NOTIFICATION_CUSTOM = 98703;
-    private final int NOTIFICATION_INTENT = 98704;
+    private final int NOTIFICATION_ICON_ONLY = R.id.button_simple;
+    private final int NOTIFICATION_TEXT = R.id.button_text;
+    private final int NOTIFICATION_CUSTOM = R.id.button_custom;
+    private final int NOTIFICATION_INTENT = R.id.button_intent;
     private Context mContext;
 
     public static NotificationFragment newInstance() {
@@ -42,20 +42,30 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
         mContext = getActivity().getApplicationContext();
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
 
-        Button btnSimple = (Button) view.findViewById(R.id.button_simple);
-        btnSimple.setOnClickListener(this);
+        Button btnSimple = (Button) view.findViewById(NOTIFICATION_ICON_ONLY);
+        if (btnSimple != null) {
+            btnSimple.setOnClickListener(this);
+        }
 
-        Button btnText = (Button) view.findViewById(R.id.button_text);
-        btnText.setOnClickListener(this);
+        Button btnText = (Button) view.findViewById(NOTIFICATION_TEXT);
+        if (btnText != null) {
+            btnText.setOnClickListener(this);
+        }
 
-        Button btnCustom = (Button) view.findViewById(R.id.button_custom);
-        btnCustom.setOnClickListener(this);
+        Button btnCustom = (Button) view.findViewById(NOTIFICATION_CUSTOM);
+        if (btnCustom != null) {
+            btnCustom.setOnClickListener(this);
+        }
 
-        Button btnIntent = (Button) view.findViewById(R.id.button_intent);
-        btnIntent.setOnClickListener(this);
+        Button btnIntent = (Button) view.findViewById(NOTIFICATION_INTENT);
+        if (btnIntent != null) {
+            btnIntent.setOnClickListener(this);
+        }
 
         Button btnRemove = (Button) view.findViewById(R.id.button_remove);
-        btnRemove.setOnClickListener(this);
+        if (btnRemove != null) {
+            btnRemove.setOnClickListener(this);
+        }
         return view;
     }
 
@@ -66,10 +76,10 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
         builder.setSmallIcon(R.mipmap.ic_launcher);
         NotificationManagerCompat manager = NotificationManagerCompat.from(mContext);
         switch (v.getId()) {
-        case R.id.button_simple:
+        case NOTIFICATION_ICON_ONLY:
             manager.notify(NOTIFICATION_ICON_ONLY, builder.build());
             break;
-        case R.id.button_text:
+        case NOTIFICATION_TEXT:
             builder.setContentTitle(res.getString(R.string.notification_title));    // 1行目
             builder.setContentText(res.getString(R.string.notification_text));      // 2行目
             builder.setSubText(res.getString(R.string.notification_subtext));       // 3行目
@@ -77,17 +87,18 @@ public class NotificationFragment extends Fragment implements View.OnClickListen
             builder.setWhen(System.currentTimeMillis());                            // 時刻情報
             manager.notify(NOTIFICATION_TEXT, builder.build());
             break;
-        case R.id.button_custom:
+        case NOTIFICATION_CUSTOM:
             RemoteViews customView = new RemoteViews(mContext.getPackageName(), R.layout.notification_custom);
             String title = mContext.getResources().getString(R.string.notification_title);
             customView.setTextViewText(R.id.custom_title, title);
             builder.setContent(customView);
             manager.notify(NOTIFICATION_CUSTOM, builder.build());
             break;
-        case R.id.button_intent:
+        case NOTIFICATION_INTENT:
             // 電話帳プロフィールを表示する
             Intent intent = new Intent(Intent.ACTION_VIEW, ContactsContract.Profile.CONTENT_URI);
-            PendingIntent contentIntent = PendingIntent.getActivity(mContext, REQ_CODE_PROFILE, intent, PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent contentIntent = PendingIntent.getActivity(mContext, REQ_CODE_PROFILE,
+                                                            intent, PendingIntent.FLAG_ONE_SHOT);
             builder.setContentIntent(contentIntent);
             builder.setContentTitle(res.getString(R.string.notification_title_open_profile));
             builder.setAutoCancel(true);    // タップしたら削除
