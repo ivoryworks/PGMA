@@ -114,6 +114,29 @@ public class NotificationFragmentTest {
     }
 
     @Test
+    public void testCustomNotification() {
+        UiSelector selector = new UiSelector().resourceId("com.ivoryworks.pgma.debug:id/button_custom");
+        try {
+            mDevice.findObject(selector).click();
+
+            Tools.openNotification(mDevice);
+
+            // Title
+            UiSelector title = new UiSelector().className(TextView.class.getName()).
+                    resourceId("com.ivoryworks.pgma.debug:id/custom_title");
+            Assert.assertTrue(mDevice.findObject(title).exists());
+            Assert.assertTrue(mDevice.findObject(title).getText().equals("Notification title"));
+
+            mDevice.findObject(title).click();
+
+            mDevice.pressBack();    // close Notification
+            mDevice.findObject(mRemoveBtn).click(); // Notification消去
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void testOrientation() {
         try {
             mDevice.setOrientationLeft();
