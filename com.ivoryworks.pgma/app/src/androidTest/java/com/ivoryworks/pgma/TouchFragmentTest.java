@@ -9,10 +9,13 @@ import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -49,12 +52,9 @@ public class TouchFragmentTest {
     @Test
     public void testOrientation() {
         try {
-            mDevice.setOrientationLeft();
-            mDevice.setOrientationRight();
-            mDevice.setOrientationNatural();
+            Tools.orientation(mDevice);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            assertFalse(true);
         }
-        SystemClock.sleep(5000);
     }
 }

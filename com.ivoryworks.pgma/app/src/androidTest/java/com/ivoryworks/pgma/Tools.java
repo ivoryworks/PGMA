@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.RemoteException;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
@@ -81,5 +82,11 @@ public class Tools {
         int displayWidth = device.getDisplayWidth();
         int displayHeight = device.getDisplayHeight();
         device.swipe(displayWidth/2, 0, displayWidth/2, displayHeight/2, SWIPE_STEP);
+    }
+
+    public static void orientation(UiDevice device) throws RemoteException {
+        device.setOrientationLeft();
+        device.setOrientationRight();
+        device.setOrientationNatural();
     }
 }

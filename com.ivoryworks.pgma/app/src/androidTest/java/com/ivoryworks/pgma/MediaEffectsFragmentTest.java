@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -38,16 +39,10 @@ public class MediaEffectsFragmentTest {
     @Test
     public void testOrientation() {
         try {
-            SystemClock.sleep(2000);
-            mDevice.setOrientationLeft();
-            SystemClock.sleep(2000);
-            mDevice.setOrientationRight();
-            SystemClock.sleep(2000);
-            mDevice.setOrientationNatural();
+            Tools.orientation(mDevice);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            assertFalse(true);
         }
-        SystemClock.sleep(5000);
     }
 
     @Test

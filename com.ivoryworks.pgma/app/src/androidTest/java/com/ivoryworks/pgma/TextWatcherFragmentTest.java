@@ -64,12 +64,9 @@ public class TextWatcherFragmentTest {
     @Test
     public void testOrientation() {
         try {
-            mDevice.setOrientationLeft();
-            mDevice.setOrientationRight();
-            mDevice.setOrientationNatural();
+            Tools.orientation(mDevice);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            assertFalse(true);
         }
-        SystemClock.sleep(5000);
     }
 }

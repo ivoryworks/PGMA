@@ -120,9 +120,7 @@ public class PickImageFragmentTest {
     @Test
     public void testOrientation() {
         try {
-            mDevice.setOrientationLeft();
-            mDevice.setOrientationRight();
-            mDevice.setOrientationNatural();
+            Tools.orientation(mDevice);
             SystemClock.sleep(2000);
 
             mDevice.findObject(mSelectorCamera).clickAndWaitForNewWindow();
@@ -130,14 +128,12 @@ public class PickImageFragmentTest {
             mDevice.findObject(mSelectorCamDone).clickAndWaitForNewWindow();
             SystemClock.sleep(2000);
 
-            mDevice.setOrientationLeft();
-            mDevice.setOrientationRight();
-            mDevice.setOrientationNatural();
+            Tools.orientation(mDevice);
             SystemClock.sleep(2000);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            assertFalse(true);
         } catch (UiObjectNotFoundException e) {
-            e.printStackTrace();
+            assertFalse(true);
         }
     }
 }

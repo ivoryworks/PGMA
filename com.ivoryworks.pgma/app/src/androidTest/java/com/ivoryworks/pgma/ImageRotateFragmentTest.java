@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static junit.framework.Assert.assertFalse;
+
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class ImageRotateFragmentTest {
@@ -32,12 +34,9 @@ public class ImageRotateFragmentTest {
     @Test
     public void testOrientation() {
         try {
-            mDevice.setOrientationLeft();
-            mDevice.setOrientationRight();
-            mDevice.setOrientationNatural();
+            Tools.orientation(mDevice);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            assertFalse(true);
         }
-        SystemClock.sleep(5000);
     }
 }
