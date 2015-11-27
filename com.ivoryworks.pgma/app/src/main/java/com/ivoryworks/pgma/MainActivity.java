@@ -134,6 +134,10 @@ public class MainActivity extends ActionBarActivity
             tag = NotificationFragment.TAG;
             fragment = NotificationFragment.newInstance();
             break;
+        case R.string.title_tab:
+            tag = NotificationFragment.TAG;
+            fragment = TabFragment.newInstance();
+            break;
         case R.string.title_top:
         default:
             tag = PlaceholderFragment.TAG;

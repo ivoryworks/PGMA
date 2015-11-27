@@ -33,5 +33,6 @@
         <item>@string/title_pinch</item>
         <item>@string/title_canvas</item>
         <item>@string/title_notification</item>
+        <item>@string/title_tab</item>
     </string-array>
 </resources>

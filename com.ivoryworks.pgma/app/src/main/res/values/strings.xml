@@ -25,6 +25,7 @@
     <string name="title_pinch">Pinch</string>
     <string name="title_canvas">Canvas</string>
     <string name="title_notification">Notification</string>
+    <string name="title_tab">Tab</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
