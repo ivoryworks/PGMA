@@ -48,3 +48,4 @@ Target version:22(Lollipop)
     - フルタイトル
     - カスタムView
     - NotificationからのIntent発行
+1. Tab
