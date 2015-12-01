@@ -6,8 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class TabFragment extends Fragment {
+
+    private View mView;
 
     public static String TAG = TabFragment.class.getSimpleName();
 
@@ -21,13 +24,41 @@ public class TabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tab, container, false);
+        mView = inflater.inflate(R.layout.fragment_tab, container, false);
 
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+        Button btnSimple = (Button) mView.findViewById(R.id.button_simple);
+        btnSimple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTabSimple();
+            }
+        });
+
+        Button btnIcon = (Button) mView.findViewById(R.id.button_icon);
+        btnIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTabIcon();
+            }
+        });
+
+        setTabSimple();
+        return mView;
+    }
+
+    private void setTabSimple() {
+        TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
+        tabLayout.removeAllTabs();
         tabLayout.addTab(tabLayout.newTab().setText("tab 1"));
         tabLayout.addTab(tabLayout.newTab().setText("tab 2"));
         tabLayout.addTab(tabLayout.newTab().setText("tab 3"));
+    }
 
-        return view;
+    private void setTabIcon() {
+        TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
+        tabLayout.removeAllTabs();
+        tabLayout.addTab(tabLayout.newTab().setText("tab 1").setIcon(R.drawable.octocat));
+        tabLayout.addTab(tabLayout.newTab().setText("tab 2").setIcon(R.drawable.octocat));
+        tabLayout.addTab(tabLayout.newTab().setText("tab 3").setIcon(R.drawable.octocat));
     }
 }
