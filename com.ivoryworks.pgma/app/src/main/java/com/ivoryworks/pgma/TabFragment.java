@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 public class TabFragment extends Fragment {
 
@@ -42,6 +44,15 @@ public class TabFragment extends Fragment {
             }
         });
 
+        Switch swScrollable = (Switch) mView.findViewById(R.id.switch_scrollable);
+        swScrollable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
+                tabLayout.setTabMode(isChecked ? TabLayout.MODE_SCROLLABLE : TabLayout.MODE_FIXED);
+            }
+        });
+
         setTabSimple();
         return mView;
     }
@@ -52,6 +63,8 @@ public class TabFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("tab 1"));
         tabLayout.addTab(tabLayout.newTab().setText("tab 2"));
         tabLayout.addTab(tabLayout.newTab().setText("tab 3"));
+        tabLayout.addTab(tabLayout.newTab().setText("tab 4"));
+        tabLayout.addTab(tabLayout.newTab().setText("tab 5"));
     }
 
     private void setTabIcon() {

@@ -74,8 +74,9 @@
     <string name="notification_info">Info message</string>
     <string name="remove_notifications">Remove notifications</string>
 
-    <string name="label_tab_simple">Simple 3</string>
+    <string name="label_tab_simple">Simple 5</string>
     <string name="label_tab_icon">Icon 3</string>
+    <string name="label_tab_scrollable">Scrollable</string>
 
     <string name="msg_please_wait">Please wait...</string>
     <string name="msg_share_file_not_fond">Share file can not be found.</string>
