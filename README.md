@@ -36,16 +36,17 @@ Target version:22(Lollipop)
 1. Gallery
   - GridView
 1. Fonts
-    - frameworkのTypefaceを使用
-    - assetsに保持したフォントファイルを使用
+  - frameworkのTypefaceを使用
+  - assetsに保持したフォントファイルを使用
 1. TextWatcher
-    - TextWatcher
+  - TextWatcher
 1. Pinch
-    - ScaleGestureDetector(Pinch-in/Pinch-out)
+  - ScaleGestureDetector(Pinch-in/Pinch-out)
 1. Canvas
 1. Notification
-    - アイコンのみ
-    - フルタイトル
-    - カスタムView
-    - NotificationからのIntent発行
+  - アイコンのみ
+  - フルタイトル
+  - カスタムView
+  - NotificationからのIntent発行
 1. Tab
+  - TabLayout
