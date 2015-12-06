@@ -50,3 +50,4 @@ Target version:22(Lollipop)
   - NotificationからのIntent発行
 1. Tab
   - TabLayout
+  - Switch
