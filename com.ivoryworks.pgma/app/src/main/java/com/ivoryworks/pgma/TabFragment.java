@@ -32,7 +32,7 @@ public class TabFragment extends Fragment {
         btnSimple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTabSimple();
+                setTabSimple(5);
             }
         });
 
@@ -40,7 +40,7 @@ public class TabFragment extends Fragment {
         btnIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTabIcon();
+                setTabIcon(3);
             }
         });
 
@@ -53,25 +53,23 @@ public class TabFragment extends Fragment {
             }
         });
 
-        setTabSimple();
+        setTabSimple(3);
         return mView;
     }
 
-    private void setTabSimple() {
+    private void setTabSimple(int tabNum) {
         TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
         tabLayout.removeAllTabs();
-        tabLayout.addTab(tabLayout.newTab().setText("tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("tab 3"));
-        tabLayout.addTab(tabLayout.newTab().setText("tab 4"));
-        tabLayout.addTab(tabLayout.newTab().setText("tab 5"));
+        for (int i = 0; i < tabNum; i++) {
+            tabLayout.addTab(tabLayout.newTab().setText("tab " + i));
+        }
     }
 
-    private void setTabIcon() {
+    private void setTabIcon(int tabNum) {
         TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
         tabLayout.removeAllTabs();
-        tabLayout.addTab(tabLayout.newTab().setText("tab 1").setIcon(R.drawable.octocat));
-        tabLayout.addTab(tabLayout.newTab().setText("tab 2").setIcon(R.drawable.octocat));
-        tabLayout.addTab(tabLayout.newTab().setText("tab 3").setIcon(R.drawable.octocat));
+        for (int i = 0; i < tabNum; i++) {
+            tabLayout.addTab(tabLayout.newTab().setText("tab " + i).setIcon(R.drawable.octocat));
+        }
     }
 }
