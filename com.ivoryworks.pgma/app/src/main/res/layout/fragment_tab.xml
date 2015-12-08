@@ -32,4 +32,13 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_tab_gravity_center"
+        android:id="@+id/switch_gravity_center"
+        android:layout_below="@+id/switch_scrollable"
+        android:layout_alignRight="@+id/switch_scrollable"
+        android:layout_alignEnd="@+id/switch_scrollable" />
+
 </RelativeLayout>

@@ -53,6 +53,15 @@ public class TabFragment extends Fragment {
             }
         });
 
+        Switch swGravityCenter = (Switch) mView.findViewById(R.id.switch_gravity_center);
+        swGravityCenter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
+                tabLayout.setTabGravity(isChecked ? TabLayout.GRAVITY_CENTER : TabLayout.GRAVITY_FILL);
+            }
+        });
+
         setTabSimple(3);
         return mView;
     }
