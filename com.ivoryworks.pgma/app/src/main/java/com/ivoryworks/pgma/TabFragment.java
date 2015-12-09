@@ -77,6 +77,21 @@ public class TabFragment extends Fragment {
             }
         });
 
+        Button buttonRemove = (Button) mView.findViewById(R.id.button_remove);
+        buttonRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tabCnt = mTabLayout.getTabCount() - 1;
+                if (tabCnt > 0) {
+                    if (mLastStyle == TAB_STYLE_ICON) {
+                        setTabIcon(tabCnt);
+                    } else {
+                        setTabSimple(tabCnt);
+                    }
+                }
+            }
+        });
+
         setTabSimple(3);
         return mView;
     }

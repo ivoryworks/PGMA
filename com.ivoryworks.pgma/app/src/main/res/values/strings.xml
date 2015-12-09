@@ -79,6 +79,7 @@
     <string name="label_tab_scrollable">Scrollable</string>
     <string name="label_tab_gravity_center">GravityCenter</string>
     <string name="label_tab_add">add tab</string>
+    <string name="label_tab_remove">remove tab</string>
 
     <string name="msg_please_wait">Please wait...</string>
     <string name="msg_share_file_not_fond">Share file can not be found.</string>
