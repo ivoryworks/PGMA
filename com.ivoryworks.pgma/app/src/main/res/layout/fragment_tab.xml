@@ -41,4 +41,14 @@
         android:layout_alignRight="@+id/switch_scrollable"
         android:layout_alignEnd="@+id/switch_scrollable" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_tab_add"
+        android:id="@+id/button_add"
+        android:layout_below="@+id/switch_gravity_center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp" />
+
 </RelativeLayout>

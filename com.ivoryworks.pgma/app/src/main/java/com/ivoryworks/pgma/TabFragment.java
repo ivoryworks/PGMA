@@ -13,8 +13,12 @@ import android.widget.Switch;
 public class TabFragment extends Fragment {
 
     private View mView;
+    private TabLayout mTabLayout;
 
     public static String TAG = TabFragment.class.getSimpleName();
+    private int TAB_STYLE_SIMPLE = 1;
+    private int TAB_STYLE_ICON = 2;
+    private int mLastStyle = TAB_STYLE_SIMPLE;
 
     public static TabFragment newInstance() {
         return new TabFragment();
@@ -27,6 +31,7 @@ public class TabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_tab, container, false);
+        mTabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
 
         Button btnSimple = (Button) mView.findViewById(R.id.button_simple);
         btnSimple.setOnClickListener(new View.OnClickListener() {
@@ -48,8 +53,7 @@ public class TabFragment extends Fragment {
         swScrollable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
-                tabLayout.setTabMode(isChecked ? TabLayout.MODE_SCROLLABLE : TabLayout.MODE_FIXED);
+                mTabLayout.setTabMode(isChecked ? TabLayout.MODE_SCROLLABLE : TabLayout.MODE_FIXED);
             }
         });
 
@@ -57,8 +61,19 @@ public class TabFragment extends Fragment {
         swGravityCenter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
-                tabLayout.setTabGravity(isChecked ? TabLayout.GRAVITY_CENTER : TabLayout.GRAVITY_FILL);
+                mTabLayout.setTabGravity(isChecked ? TabLayout.GRAVITY_CENTER : TabLayout.GRAVITY_FILL);
+            }
+        });
+
+        Button buttonAdd = (Button) mView.findViewById(R.id.button_add);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mLastStyle == TAB_STYLE_ICON) {
+                    setTabIcon(mTabLayout.getTabCount() + 1);
+                } else {
+                    setTabSimple(mTabLayout.getTabCount() + 1);
+                }
             }
         });
 
@@ -67,18 +82,18 @@ public class TabFragment extends Fragment {
     }
 
     private void setTabSimple(int tabNum) {
-        TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
-        tabLayout.removeAllTabs();
+        mLastStyle = TAB_STYLE_SIMPLE;
+        mTabLayout.removeAllTabs();
         for (int i = 0; i < tabNum; i++) {
-            tabLayout.addTab(tabLayout.newTab().setText("tab " + i));
+            mTabLayout.addTab(mTabLayout.newTab().setText("tab " + i));
         }
     }
 
     private void setTabIcon(int tabNum) {
-        TabLayout tabLayout = (TabLayout) mView.findViewById(R.id.tab_layout);
-        tabLayout.removeAllTabs();
+        mLastStyle = TAB_STYLE_ICON;
+        mTabLayout.removeAllTabs();
         for (int i = 0; i < tabNum; i++) {
-            tabLayout.addTab(tabLayout.newTab().setText("tab " + i).setIcon(R.drawable.octocat));
+            mTabLayout.addTab(mTabLayout.newTab().setText("tab " + i).setIcon(R.drawable.octocat));
         }
     }
 }
