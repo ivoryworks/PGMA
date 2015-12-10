@@ -69,11 +69,7 @@ public class TabFragment extends Fragment {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mLastStyle == TAB_STYLE_ICON) {
-                    setTabIcon(mTabLayout.getTabCount() + 1);
-                } else {
-                    setTabSimple(mTabLayout.getTabCount() + 1);
-                }
+                addTab();
             }
         });
 
@@ -81,14 +77,7 @@ public class TabFragment extends Fragment {
         buttonRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int tabCnt = mTabLayout.getTabCount() - 1;
-                if (tabCnt > 0) {
-                    if (mLastStyle == TAB_STYLE_ICON) {
-                        setTabIcon(tabCnt);
-                    } else {
-                        setTabSimple(tabCnt);
-                    }
-                }
+                removeTab();
             }
         });
 
@@ -109,6 +98,25 @@ public class TabFragment extends Fragment {
         mTabLayout.removeAllTabs();
         for (int i = 0; i < tabNum; i++) {
             mTabLayout.addTab(mTabLayout.newTab().setText("tab " + i).setIcon(R.drawable.octocat));
+        }
+    }
+
+    private void addTab() {
+        if (mLastStyle == TAB_STYLE_ICON) {
+            setTabIcon(mTabLayout.getTabCount() + 1);
+        } else {
+            setTabSimple(mTabLayout.getTabCount() + 1);
+        }
+    }
+
+    private void removeTab() {
+        int tabCnt = mTabLayout.getTabCount() - 1;
+        if (tabCnt > 0) {
+            if (mLastStyle == TAB_STYLE_ICON) {
+                setTabIcon(tabCnt);
+            } else {
+                setTabSimple(tabCnt);
+            }
         }
     }
 }
