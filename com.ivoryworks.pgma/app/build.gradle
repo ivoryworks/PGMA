@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.ivoryworks.pgma"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testApplicationId 'com.ivoryworks.pgma.test'
