@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static junit.framework.Assert.assertFalse;
+
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
 public class TabFragmentTest {
@@ -33,8 +35,7 @@ public class TabFragmentTest {
         try {
             Tools.orientation(mDevice);
         } catch (RemoteException e) {
-            e.printStackTrace();
-            Assert.assertTrue(false);
+            assertFalse(true);
         }
     }
 }

@@ -10,6 +10,8 @@ import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.widget.EditText;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,12 +38,9 @@ public class CanvasFragmentTest {
     @Test
     public void testOrientation() {
         try {
-            mDevice.setOrientationLeft();
-            mDevice.setOrientationRight();
-            mDevice.setOrientationNatural();
+            Tools.orientation(mDevice);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            assertFalse(true);
         }
-        SystemClock.sleep(5000);
     }
 }
