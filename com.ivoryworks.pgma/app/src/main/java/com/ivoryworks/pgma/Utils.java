@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 
 import static junit.framework.Assert.assertTrue;
@@ -128,7 +129,24 @@ public class Utils {
 
                 return getDataColumn(context, contentUri, selection, selectionArgs);
             }
+        } else if (isGoogleDocsUri(uri)) {
+            String cacheFileName = "NetworkCacheFile";
+            Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null) {
+                if(cursor.moveToFirst()) {
+                    cacheFileName = cursor.getString(2);    // "_display_name" ???
+                }
+            }
 
+            File downloadFile = new File(
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                    cacheFileName);
+            String cacheFilePath = downloadFile.getPath();
+
+            ImageDownloadTask ringtoneDownloadTask = new ImageDownloadTask(uri, downloadFile, context);
+            ringtoneDownloadTask.execute();
+
+            return cacheFilePath;
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {
             // Media store (and general)
             if (isGooglePhotosUri(uri)) {
@@ -194,6 +212,10 @@ public class Utils {
 
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
+
+    public static boolean isGoogleDocsUri(Uri uri) {
+        return "com.google.android.apps.docs.storage".equals(uri.getAuthority());
     }
 
     public static String actionToString(int action) {
